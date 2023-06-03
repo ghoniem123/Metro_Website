@@ -4,6 +4,8 @@ const db = require("../../connectors/db");
 const roles = require("../../constants/roles");
 const {getSessionToken}=require('../../utils/session');
 const e = require("express");
+const {getSessionToken}=require('../../utils/session');
+const e = require("express");
 const getUser = async function (req) {
   const sessionToken = getSessionToken(req);
   if (!sessionToken) {
@@ -48,7 +50,6 @@ module.exports = function (app) {
       return res.status(400).send("Could not get users");
     }
   });
-
   app.post("/api/v1/station", async function (req, res) {
     const stationExists = await db
       .select("*")
@@ -473,7 +474,6 @@ module.exports = function (app) {
    }
 
   });
-
   app.post("/api/v1/route", async function (req, res){
 
     try{

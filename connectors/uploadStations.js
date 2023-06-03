@@ -6,6 +6,7 @@ async function uploadSR() {
     { stationid: 1, routeid: 2 },
     { stationid: 2, routeid: 1 },
     { stationid: 2, routeid: 2 },
+    { stationid: 2, routeid: 4 },
     { stationid: 2, routeid: 3 },
     { stationid: 2, routeid: 4 },
     { stationid: 3, routeid: 3 },
@@ -105,6 +106,6 @@ async function uploadR() {
     await db("se_project.routes").insert(element).returning("*");
   }
 }
-//uploadS(); first to run
-//uploadR(); second
-//uploadSR(); third
+//uploadS();// first to run
+uploadR(); //second
+uploadSR(); //third
