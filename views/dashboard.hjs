@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Courses</title>
+    <title>Home</title>
     <link rel='stylesheet' href='/styles/bootstrap.min.css' />
     <link rel='stylesheet' href='/styles/style.css' />
     <script src="/js/jquery-2.2.0.min.js" type="text/javascript"></script>
@@ -18,17 +18,40 @@
       </script> 
     <div>
       <div>
-        <nav class="navbar navbar-inverse" style="padding-left:130px;">
+        <nav class="navbar navbar-inverse" style="padding-left:20px; padding-right:20px">
           <ul class="nav navbar-nav">
             <li class="active"><a href="/dashboard">Home</a></li>
-            <li><a href="/stations_example">Station</a></li>
+
+             {{#isAdmin}}
+            <li><a href="/station">Stations</a></li>
             <li><a href="/users">Users</a></li>
-            <li><a href="/users/add">Add Users</a></li>
+            <li><a href="/routes">Routes</a></li>
+            <li><a href="/zones">Zones</a></li>
+            <li><a href="/routes">Routes</a></li>
+            <li><a href="/admin_requests">Requests</a></li>
+              {{/isAdmin}}
+
+              {{#isNormal}}
+            <li><a href="/subscriptions">Subscriptions</a></li>
+            <li><a href="/tickets">Tickets</a></li>
+            <li><a href="/prices">Prices</a></li>
+            <li><a href="/rides">Rides</a></li>
+            <li><a href="/requests">Requests</a></li>
+              {{/isNormal}}
+
+              {{#isSenior}}
+          <li><a href="/subscriptions">Subscriptions</a></li>
+            <li><a href="/tickets">Tickets</a></li>
+            <li><a href="/prices">Prices</a></li>
+            <li><a href="/rides">Rides</a></li>
+            <li><a href="/requests">Requests</a></li>
+              {{/isSenior}}
+            <li><a href="/resetpassword">Reset password</a></li>
             <li><a href="/">Logout</a></li>
           </ul>
        </nav>
       </div>
-      <p>Welcome {{firstName}}, you are logged in!</p>
+      <p style="padding-left:20px;" >Welcome {{firstname}}, you are logged in!</p>
     </div>
   </body>
   </html>

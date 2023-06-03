@@ -76,15 +76,16 @@ CREATE TABLE IF NOT EXISTS se_project.rides
     ticketid integer not null,
     tripdate timestamp not null,
     FOREIGN KEY( userid ) REFERENCES se_project.users,
-    FOREIGN KEY( ticketid ) REFERENCES se_project.rides,
+    FOREIGN KEY( ticketid ) REFERENCES se_project.tickets,
     CONSTRAINT rides_pkey PRIMARY KEY (id)
 );
 CREATE TABLE IF NOT EXISTS se_project.transactions
 (
     id SERIAL NOT NULL,
-    amount INTEGER NOT NULL,
+    amount FLOAT NOT NULL,
     userid INTEGER NOT NULL,
     purchasedIid text NOT NULL, 
+    purchasetype text NOT NULL,
     FOREIGN KEY( userid ) REFERENCES se_project.users,
     CONSTRAINT transactions_pkey PRIMARY KEY (id)
 );
@@ -104,7 +105,7 @@ CREATE TABLE IF NOT EXISTS se_project.senior_requests
     id SERIAL NOT NULL,
     status text NOT NULL,
     userid Integer NOT NULL, 
-    nationalid INTEGER not null,
+    nationalid text not null,
     FOREIGN KEY( userid ) REFERENCES se_project.users,
     CONSTRAINT senior_requests_pkey PRIMARY KEY (id)
 );
