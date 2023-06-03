@@ -1,13 +1,33 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Courses</title>
+    <title>Stations</title>
     <link rel='stylesheet' href='/styles/bootstrap.min.css' />
     <link rel='stylesheet' href='/styles/style.css' />
     <script src="/js/jquery-2.2.0.min.js" type="text/javascript"></script>
     <script src="/js/bootstrap.min.js" type="text/javascript"></script>
   </head>
   <body>
+    <script>
+  
+        console.log('welcome')
+
+        $.ajax({
+          type: "GET",
+          url: '/api/v1/zones',
+          data,
+          success: function (serverResponse) {
+            if (serverResponse) {
+              alert('Successfully added User');
+            }
+                },
+          error: function (err) {
+            console.log(err.responseText)
+            alert(err.responseText)
+          }
+        });
+ 
+    </script>
     <div>
     <div>
     <nav class="navbar navbar-inverse" style="padding-left:130px;">
@@ -32,7 +52,6 @@
           <tr>
             <th scope="col">id</th>
             <th scope="col">Name</th>
-            <th scope="col">code</th>
             <th scope="col">Type</th>
             <th scope="col">Position</th>
             <th scope="col">status</th>
@@ -43,10 +62,10 @@
           {{#stations}}
             <tr>
               <td>{{id}}</td>
-              <td>{{stationName}}</td>
-              <td>{{stationType}}</td>
-              <td>{{stationPosition}}</td>
-              <td>{{stationStatus}}</td>
+              <td>{{stationname}}</td>
+              <td>{{stationtype}}</td>
+              <td>{{stationposition}}</td>
+              <td>{{stationstatus}}</td>
             </tr> 
           {{/stations}}
         </thead>

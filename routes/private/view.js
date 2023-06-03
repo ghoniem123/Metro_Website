@@ -16,7 +16,7 @@ const getUser = async function(req) {
     .first();
   
   console.log('user =>', user)
-  user.isStudent = user.roleid === roles.student;
+  user.isNormal = user.roleid === roles.user;
   user.isAdmin = user.roleid === roles.admin;
   user.isSenior = user.roleid === roles.senior;
 
@@ -34,6 +34,26 @@ module.exports = function(app) {
   app.get('/users', async function(req, res) {
     const users = await db.select('*').from('se_project.users');
     return res.render('users', { users });
+  });
+
+  app.get('/resetPassword', async function(req, res) {
+    const user = await getUser(req);
+    return res.render('resetpassword', user);
+  });
+
+  app.get('/prices', async function(req, res) {
+    const user = await getUser(req);
+    const stations = await db.select('id').from('se_project.stations');
+    return res.render('prices', {user,stations});
+  });
+
+  app.get('/subscriptions', async function(req, res) {
+    const user = await getUser(req);
+    return res.render('subscriptions', user);
+  });
+  app.get('/buysubscription', async function(req, res) {
+    const user = await getUser(req);
+    return res.render('buysubscription', user);
   });
 
   // Register HTTP endpoint to render /courses page
