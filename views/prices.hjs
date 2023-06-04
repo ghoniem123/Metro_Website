@@ -50,7 +50,7 @@
             <li><a href="/subscriptions">Subscriptions</a></li>
             <li><a href="/tickets">Tickets</a></li>
             <li class="active"><a href="/prices">Prices</a></li>
-            <li><a href="/rides">Rides</a></li>
+            <li><a href="/rises/simulate">Rides</a></li>
             <li><a href="/requests/senior">Senior Request</a></li>
             <li><a href="/requests/refund">Refund Requests</a></li>
             <li ><a href="/resetpassword">Reset password</a></li>

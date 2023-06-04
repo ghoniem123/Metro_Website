@@ -10,6 +10,12 @@
   </head>
   <body>
     <script>
+      $(document).ready(function() {
+        const sessionToken = document.cookie.includes('session_token');
+        if (!sessionToken) {
+          location.href = '/';
+        }
+      });
          $(document).ready(function() {
         const sessionToken = document.cookie.includes('session_token');
         if (!sessionToken) {
@@ -72,7 +78,7 @@
             <li><a href="/subscriptions">Subscriptions</a></li>
             <li class="active"><a href="/tickets">Tickets</a></li>
             <li ><a href="/prices">Prices</a></li>
-            <li><a href="/rides">Rides</a></li>
+            <li><a href="/rises/simulate">Rides</a></li>
             <li><a href="/requests/senior">Senior Request</a></li>
             <li><a href="/requests/refund">Refund Requests</a></li>
             <li ><a href="/resetpassword">Reset password</a></li>
