@@ -10,6 +10,12 @@
   </head>
   <body>
     <script>
+         $(document).ready(function() {
+        const sessionToken = document.cookie.includes('session_token');
+        if (!sessionToken) {
+          location.href = '/';
+        }
+      });
     $(document).ready(function(){    
       $("#pay").click(function() {
         const creditCardNumber = $('#credit').val();
@@ -120,7 +126,9 @@
           <div class="col-sm-10 col-sm-offset-2">
               <input id="pay" name="pay" type="button" value="Pay" class="btn btn-primary">
               To pay with subscription <a href="/ticket_sub">click here.</a>
-          </div>
+              <br>
+             To view your tickets <a href="/viewtickets">click here.</a>
+      </div>
       </div>
        <div class="form-group" style="padding-left:30px ;">
           <label for="ticket" class=" control-label">ticket ID : </label>

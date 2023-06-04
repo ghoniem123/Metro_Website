@@ -49,21 +49,32 @@ module.exports = function(app) {
 
   app.get('/subscriptions', async function(req, res) {
     const user = await getUser(req);
-    return res.render('subscriptions', user);
+    const sub = await db.select('*').from('se_project.subsription').where("userid",user.userid);
+    return res.render('subscriptions', {user,sub});
   });
+  
   app.get('/buysubscription', async function(req, res) {
     const user = await getUser(req);
     return res.render('buysubscription', user);
+  });
+
+  app.get('/viewtickets', async function(req, res) {
+    const user = await getUser(req);
+    const ticket = await db.select('*').from('se_project.tickets').where("userid",user.userid );
+    return res.render('view_ticket', {user,ticket});
   });
 
   app.get('/tickets', async function(req, res) {
     return res.render('tickets');
   });
   app.get('/ticket_sub', async function(req, res) {
+    const user = await getUser(req);
     return res.render('pay_ticket_sub');
   });
   app.get('/requests/refund', async function(req, res) {
-    return res.render('refundrequests');
+    const user = await getUser(req);
+    const refund = await db.select('*').from('se_project.refund_requests').where("userid",user.userid );
+    return res.render('refundrequests', {user,refund});
   });
   app.get('/requests/senior', async function(req, res) {
     const user = await getUser(req);

@@ -1237,6 +1237,9 @@ const senior = await db
   if (senior[0]["roleid"]==3)
     ticket_price*=0.5;
 
+if(ticket_price!=req.body.payedamount)
+return res.status(400).send(`You should only pay the exact ticket price, the ticket price is ${ticket_price}`);
+
     const newTicket = {
       origin: req.body.origin,
       destination : req.body.destination,
@@ -1913,6 +1916,25 @@ else  if (req.body.subtype=="quarterly")
 else if (req.body.subtype=="monthly")
    no_tickets=10;
 
+
+   const zone_price = await db
+   .select("price")
+   .from("se_project.zones")
+   .where("id", req.body.zoneid);
+ 
+ let sub_price= no_tickets*zone_price[0]["price"];
+
+ const user_Senior = await db
+.select("roleid")
+.from("se_project.users")
+.where("id", user.userid);
+
+if (user_Senior[0]["roleid"]==3)
+sub_price*=0.5;
+
+   if(sub_price!=req.body.payedamount)
+   return res.status(400).send(`You should only pay the exact subscription price, the ticket price is ${sub_price}`);
+
 const newsubscription ={
 subtype:req.body.subtype,
 zoneid:req.body.zoneid,
@@ -1921,21 +1943,6 @@ nooftickets:no_tickets
 }
 
 const subscriptionid = await db("se_project.subsription").insert(newsubscription).returning("id");
-
-const zone_price = await db
-  .select("price")
-  .from("se_project.zones")
-  .where("id", req.body.zoneid);
-
-let sub_price= no_tickets*zone_price[0]["price"];
-
-const user_Senior = await db
-.select("roleid")
-.from("se_project.users")
-.where("id", user.userid);
-
-if (user_Senior[0]["roleid"]==3)
-  sub_price*=0.5;
 
 const newtransaction={
   amount: req.body.payedamount,//sub_price,

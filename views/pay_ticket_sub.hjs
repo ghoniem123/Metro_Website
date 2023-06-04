@@ -56,7 +56,7 @@
           <ul class="nav navbar-nav">
            <li ><a href="/dashboard">Home</a></li>
             <li><a href="/subscriptions">Subscriptions</a></li>
-            <li class="active"><a href="/tickets">Tickets</a></li>
+            <li><a href="/tickets">Tickets</a></li>
             <li ><a href="/prices">Prices</a></li>
             <li><a href="/rides">Rides</a></li>
             <li><a href="/requests/senior">Senior Request</a></li>

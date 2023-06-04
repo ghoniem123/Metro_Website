@@ -87,6 +87,31 @@
             </tr>
           </table>
       </div>
+      </form>
+       <form class="form-horizontal" style="width: 50%;">
+    <div>
+        <h3><u>My subscriptions</u></h3>
+    </div>
+      <div >
+          <table style="bgcolor:black; width:100%; " align="center">
+            <thead>
+            <tr>
+                <th style="text-align: center">Subscription type </th>
+                <th style="text-align: center">Zone number</th>
+                <th style="text-align: center">Number of tickets left</th>
+            </tr>
+            </thead>
+            <tbody>
+              {{#sub}}
+            <tr>
+                <td style="text-align: center">{{subtype}}</td>
+                <td style="text-align: center">{{zoneid}}</td>
+                <td style="text-align: center">{{nooftickets}}</td>
+            </tr>
+            {{/sub}}
+           </tbody>
+          </table>
+      </div>
       <div class="form-group">
           <div>
             <br>
