@@ -70,8 +70,6 @@ module.exports = function(app) {
   });
   app.get('/ticket_sub', async function(req, res) {
     const user = await getUser(req);
-    return res.render('pay_ticket_sub');
-    const user = await getUser(req);
     return res.render('pay_ticket_sub',user);
     
   });
