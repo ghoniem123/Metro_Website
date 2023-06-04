@@ -10,7 +10,7 @@
   </head>
   <body>
     <script>
-      $(document).ready(function() {
+       $(document).ready(function() {
         const sessionToken = document.cookie.includes('session_token');
         if (!sessionToken) {
           location.href = '/';
@@ -57,6 +57,33 @@
     </div>
 
     <div style="padding-left:20px ;">
+       <div>
+        <h3><u>My subscriptions</u></h3>
+    </div>
+      <div >
+          <table style="bgcolor:black; width:100%; " align="center">
+            <thead>
+            <tr>
+                <th style="text-align: center">Request ID </th>
+                <th style="text-align: center">Request status</th>
+                <th style="text-align: center">Refund amount</th>
+                <th style="text-align: center">Ticket ID</th>
+            </tr>
+            </thead>
+            <tbody>
+              {{#refund}}
+            <tr>
+                <td style="text-align: center">{{id}}</td>
+                <td style="text-align: center">{{status}}</td>
+                <td style="text-align: center">{{refundamount}}</td>
+                <td style="text-align: center">{{ticketid}}</td>
+            </tr>
+            {{/refund}}
+           </tbody>
+          </table>
+      </div>
+      <br>
+      <br>
       <h3><u>Request Refund</u></h3>
     </div>
     <div>
@@ -69,7 +96,7 @@
       </div>
       <div class="form-group">
           <div class="col-sm-10 col-sm-offset-2">
-              <input id="pay" name="pay" type="button" value="request" class="btn btn-primary">
+              <input id="pay" name="pay" type="submit" value="request" class="btn btn-primary">
           </div>
       </div>
   </form>

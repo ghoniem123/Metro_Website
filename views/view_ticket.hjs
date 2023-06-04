@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <head>
+      <link rel='stylesheet' href='/styles/bootstrap.min.css' />
+      <link rel='stylesheet' href='/styles/style.css' />
+      <script src="/js/jquery-2.2.0.min.js" type="text/javascript"></script>
+      <script src="/js/bootstrap.min.js" type="text/javascript"></script>
+    </head>
+  </head>
+  <body>
+   <script>
+     $(document).ready(function() {
+        const sessionToken = document.cookie.includes('session_token');
+        if (!sessionToken) {
+          location.href = '/';
+        }
+      });
+   </script>
+     <div>
+      <nav class="navbar navbar-inverse" style="padding-left:20px; padding-right:20px">
+          <ul class="nav navbar-nav">
+           <li ><a href="/dashboard">Home</a></li>
+
+            <li><a href="/subscriptions">Subscriptions</a></li>
+            <li><a href="/tickets">Tickets</a></li>
+            <li><a href="/prices">Prices</a></li>
+            <li><a href="/rides">Rides</a></li>
+            <li><a href="/requests/senior">Senior Request</a></li>
+            <li><a href="/requests/refund">Refund Requests</a></li>
+              
+            <li><a href="/resetpassword">Reset password</a></li>
+            <li><a href="/">Logout</a></li>
+          </ul>
+      </nav>
+    </div>
+<div style ="padding-left:20px">
+       <form class="form-horizontal" style="width: 50%;">
+    <div>
+        <h3><u>Your tickets</u></h3>
+    </div>
+      <div >
+          <table style="bgcolor:black; width:100%; " align="center">
+            <thead>
+            <tr>
+              <th style="text-align: center">Ticket ID </th>
+                <th style="text-align: center">Origin station </th>
+                <th style="text-align: center">Destination station</th>
+                <th style="text-align: center">Subscription id if used</th>
+                <th style="text-align: center">Trip date</th>
+            </tr>
+            </thead>
+            <tbody>
+              {{#ticket}}
+            <tr>
+                <td style="text-align: center">{{id}}</td>
+                <td style="text-align: center">{{origin}}</td>
+                <td style="text-align: center">{{destination}}</td>
+                <td style="text-align: center">{{subid}}</td>
+                <td style="text-align: center">{{tripdate}}</td>
+            </tr>
+            {{/ticket}}
+           </tbody>
+          </table>
+      </div>
+      </form>
+</div>
+  </body>
+</html>
