@@ -4,6 +4,18 @@ const db = require("../../connectors/db");
 const roles = require("../../constants/roles");
 module.exports = function (app) {
 app.post("/api/v1/user", async function (req, res) {
+  if (!req.body.firstname) {
+    return res.status(400).send("first name is required");
+  }
+  if (!req.body.lastname) {
+    return res.status(400).send("last name is required");
+  }
+  if (!req.body.email) {
+    return res.status(400).send("email is required");
+  }
+  if (!req.body.password) {
+    return res.status(400).send("password is required");
+  }
 
     // Check if user already exists in the system
     const userExists = await db

@@ -56,6 +56,17 @@ module.exports = function(app) {
     return res.render('buysubscription', user);
   });
 
+  app.get('/tickets', async function(req, res) {
+    return res.render('tickets');
+  });
+  app.get('/ticket_sub', async function(req, res) {
+    return res.render('pay_ticket_sub');
+  });
+  app.get('/requests/refund', async function(req, res) {
+    return res.render('refundrequests');
+  });
+
+
   // Register HTTP endpoint to render /courses page
   app.get('/stations', async function(req, res) {
     const user = await getUser(req);
