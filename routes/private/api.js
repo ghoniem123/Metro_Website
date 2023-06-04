@@ -4,8 +4,6 @@ const db = require("../../connectors/db");
 const roles = require("../../constants/roles");
 const {getSessionToken}=require('../../utils/session');
 const e = require("express");
-const {getSessionToken}=require('../../utils/session');
-const e = require("express");
 const getUser = async function (req) {
   const sessionToken = getSessionToken(req);
   if (!sessionToken) {
@@ -1247,10 +1245,21 @@ const senior = await db
       tripdate:req.body.tripDate
     };
     
-      const ticketID = await db("se_project.tickets").insert(newTicket).returning("id");
+      var ticketID = await db("se_project.tickets").insert(newTicket).returning("id");
+
+      const newRide={
+        status:"upcoming",
+        origin: req.body.origin,
+        destination : req.body.destination,
+        userid: user.userid,
+        ticketid:ticketID[0],
+        tripdate:req.body.tripDate
+       }
+
+       await db("se_project.rides").insert(newRide);
 
     const newtransaction ={
-      amount : ticket_price,
+      amount : req.body.payedamount,//ticket_price,
       userid : user.userid,
       purchasediid : ticketID[0],
       purchasetype: "ticket"
@@ -1258,9 +1267,9 @@ const senior = await db
 
       await db("se_project.transactions").insert(newtransaction);
 
-
-
-      return res.status(200).json({"price is ":ticket_price, "The routes are ":RouteStations , "Transfer Stations are ":transferStations});
+      const ticketid=ticketID[0];
+      price =req.body.payedamount
+      return res.status(200).json({ticketid ,price,RouteStations ,transferStations});
 
   }catch(e){
     console.log(e.message);
@@ -1576,8 +1585,19 @@ app.post("/api/v1/tickets/purchase/subscription",  async function (req, res){
         tripdate:req.body.tripDate
       };
       
-         await db("se_project.tickets").insert(newTicket);
- 
+        var ticketID= await db("se_project.tickets").insert(newTicket).returning("id");
+
+         const newRide={
+          status:"upcoming",
+          origin: req.body.origin,
+          destination : req.body.destination,
+          userid: user.userid,
+          ticketid:ticketID[0],
+          tripdate:req.body.tripDate
+         }
+
+         await db("se_project.rides").insert(newRide);
+
          const no_tickets = await db
         .select("nooftickets")
         .from("se_project.subsription")
@@ -1588,8 +1608,9 @@ app.post("/api/v1/tickets/purchase/subscription",  async function (req, res){
         .update({
           nooftickets:no_tickets[0]["nooftickets"]-1
         });
+       const ticketid=ticketID[0];
 
-        return res.status(200).json({"price is ":0, "The routes are ":RouteStations , "Transfer Stations are ":transferStations});
+        return res.status(200).json({ticketid,RouteStations ,transferStations});
   
     }catch(e){
       console.log(e.message);
@@ -1654,13 +1675,12 @@ app.put("/api/v1/password/reset",async function (req, res){
             status : refundStatus
      })
      .returning("*");
-
      if (refundStatus=="Accept"){
       const refund_amount = await db.select("refundamount").from("se_project.refund_requests").where("id", refundID);
+      const ticketID = await db.select("ticketid").from("se_project.refund_requests").where("id", refundID);
 
       if (refund_amount[0]["refundamount"]==0){
-
-        const ticketID = await db.select("ticketid").from("se_project.refund_requests").where("id", refundID);
+             
         const subid = await db.select("subid").from("se_project.tickets").where("id", ticketID[0]["ticketid"]);
 
         let ticketsnumber = await db.select("nooftickets").from("se_project.subsription").where("id",subid[0]["subid"] );
@@ -1675,6 +1695,7 @@ app.put("/api/v1/password/reset",async function (req, res){
      })
 
       }
+      await db("se_project.rides").where("ticketid", ticketID[0]["ticketid"]).del();
 
      }
 
@@ -1874,7 +1895,7 @@ try {
   .where("userid", user.userid);
 
   if (!isEmpty(subscriptionExists)) {
-
+   if(subscriptionExists[0].nooftickets!=0)
     return res.status(400).send("you already have a valid subscription so you can't subcribe to another ");
 }
 
