@@ -65,7 +65,11 @@ module.exports = function(app) {
   app.get('/requests/refund', async function(req, res) {
     return res.render('refundrequests');
   });
-
+  app.get('/requests/senior', async function(req, res) {
+    const user = await getUser(req);
+    const senior = await db.select('*').from('se_project.senior_requests').where("userid",user.userid );
+    return res.render('seniorrequest',senior);
+  });
 
   // Register HTTP endpoint to render /courses page
   app.get('/stations', async function(req, res) {

@@ -12,7 +12,9 @@
     <script>
     $(document).ready(function(){    
       $("#pay").click(function() {
-        const ticketId = $('#ticket').val();
+          let ticketId=-1;
+        if($('#ticket').val())
+         ticketId = $('#ticket').val();
 
         $.ajax({
           type: "POST",

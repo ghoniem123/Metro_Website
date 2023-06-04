@@ -1784,6 +1784,8 @@ app.put("/api/v1/password/reset",async function (req, res){
 
  app.post("/api/v1/refund/:ticketId",async function (req, res) {
  try{
+
+ 
   const user = await getUser(req); 
   const ticketId= req.params.ticketId;
 
@@ -1842,6 +1844,9 @@ app.put("/api/v1/password/reset",async function (req, res){
 
 app.post("/api/v1/senior/request",async function (req, res) {
 const user = await getUser(req);
+if (!req.body.nationalid) {
+  return res.status(400).send("national id is required");
+}
 
 const requestExists = await db
 .select("*")
