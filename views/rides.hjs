@@ -15,11 +15,10 @@
         if (!sessionToken) {
           location.href = '/';
         }
-      });
-    $(document).ready(function(){    
+
       $("#pay").click(function() {
      
-        const origin = $('#origin').val();
+        const origin = $("#origin").val();  
         const destination = $('#destination').val();
         const tripDate = $('#date').val();
 
@@ -45,7 +44,8 @@
             }
           });
         });
-      });
+              });
+    
     </script>
      <div>
       <nav class="navbar navbar-inverse" style="padding-left:20px; padding-right:20px">
@@ -128,26 +128,32 @@
     </div>
     <div>
     <form class="form-horizontal" style="width: 50%;">
-      <div class="form-group">
-          <label for="origin" class="col-sm-2 control-label">origin station name : </label>
-          <div class="col-sm-10">
-              <input type="text" class="form-control" id="origin" name="origin" placeholder="station name" value="">
-          </div>
+      <div>
+      <label for="origin" class="control-label"style="padding-left:40px ;">origin station : </label>
+          <select id="origin">
+            {{#stations}}
+            <option>{{stationname}}</option>
+            {{/stations}}
+          </select>
       </div>
-      <div class="form-group">
-          <label for="destination" class="col-sm-2 control-label">destination station name : </label>
-          <div class="col-sm-10">
-              <input type="text" class="form-control" id="destination" name="destination" placeholder="station name" value="">
-          </div>
+      <br>
+      <div>
+       <label for="destination" class=" control-label"style="padding-left:40px ;">destination station : </label>
+          <select id="destination">
+            {{#stations}}
+            <option>{{stationname}}</option>
+            {{/stations}}
+          </select>
       </div>
+      <br>
       <div class="form-group">
           <label for="date" class="col-sm-2 control-label">trip date : </label>
           <div class="col-sm-10">
               <input type="date" class="form-control" id="date" name="date" placeholder="" value="">
           </div>
       </div>
-      <div class="form-group">
-          <div class="col-sm-10 col-sm-offset-2">
+      <div class="form-group"style="padding-left:50px ;">
+          <div >
               <input id="pay" name="pay" type="submit" value="Ride" class="btn btn-primary">
           </div>
       </div>

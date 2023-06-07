@@ -15,20 +15,18 @@
         if (!sessionToken) {
           location.href = '/';
         }
-      });
-       $(document).ready(function(){
+
         $("#submit").click(function() {
  
-          const originId = $('#origin').val();
-          const destinationId = $('#destination').val();
-
+          const originId =$("#origin option:selected").attr("id");  
+          const destinationId = $("#destination option:selected").attr("id");  
           $.ajax({
             type: "GET",
             url: `/api/v1/tickets/price?originId=${originId}&destinationId=${destinationId}` ,
             success: function(serverResponse) {
               if(serverResponse) {
                 const {price}=serverResponse[0];
-                document.getElementById("Price").innerHTML =price;
+                document.getElementById("Price").innerHTML =  price;
               }
             },
             error: function(errorResponse) {
@@ -40,8 +38,8 @@
             }
           });
         });
-       
-      });
+             });
+
    </script>
     <div>
       <nav class="navbar navbar-inverse" style="padding-left:20px; padding-right:20px">
@@ -59,21 +57,32 @@
       </nav>
     </div>
 <div style ="padding-left:20px">
+    <h3><u>Check price</u></h3>
   <form class="form-horizontal" style="width: 50%;">
-      <div class="form-group">
-          <label for="origin" class=" control-label">Origin ID : </label>
-          <input type="number" class="form-control" id="origin" name="" placeholder="origin station id" value="" min="0" >
+       <div>
+      <label for="origin" class="control-label">origin station : </label>
+          <select id="origin">
+            {{#stations}}
+            <option id={{id}}>{{stationname}}</option>
+            {{/stations}}
+          </select>
       </div>
-       <div class="form-group">
-          <label for="destination" class=" control-label">Destination ID : </label>
-          <input type="number" class="form-control" id="destination" name="" placeholder="destination station id" value=""  min="0">
+      <br>
+      <div>
+       <label for="destination" class=" control-label">destination station : </label>
+          <select id="destination">
+            {{#stations}}
+            <option id={{id}}>{{stationname}}</option>
+            {{/stations}}
+          </select>
       </div>
-      <div class="form-group">
+      <br>
+      <div class="form-group" style ="padding-left:20px">
           <div>
               <input id="submit" name="check" type="button" value="Check" class="btn btn-primary">
           </div>
       </div>
-      <div class="form-group">
+      <div class="form-group" style ="padding-left:20px">
           <label >Price : </label>
           <label id="Price"></label>
       </div>

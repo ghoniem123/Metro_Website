@@ -15,8 +15,7 @@
         if (!sessionToken) {
           location.href = '/';
         }
-      });
-    $(document).ready(function(){    
+  
       $("#pay").click(function() {
           let ticketId=-1;
         if($('#ticket').val())
@@ -58,7 +57,7 @@
 
     <div style="padding-left:20px ;">
        <div>
-        <h3><u>My subscriptions</u></h3>
+        <h3><u>My refund requests</u></h3>
     </div>
       <div >
           <table style="bgcolor:black; width:100%; " align="center">

@@ -23,7 +23,7 @@
             <li class="active"><a href="/dashboard">Home</a></li>
 
              {{#isAdmin}}
-            <li><a href="/station">Stations</a></li>
+            <li><a href="/manage/stations">Stations</a></li>
             <li><a href="/users">Users</a></li>
             <li><a href="/routes">Routes</a></li>
             <li><a href="/zones">Zones</a></li>

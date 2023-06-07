@@ -15,8 +15,6 @@
         if (!sessionToken) {
           location.href = '/';
         }
-      });
-    $(document).ready(function(){    
       $("#pay").click(function() {
         const subId = $('#subscriptionID').val();
         const origin = $('#origin').val();

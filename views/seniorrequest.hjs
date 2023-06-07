@@ -15,8 +15,7 @@
         if (!sessionToken) {
           location.href = '/';
         }
-      });
-    $(document).ready(function(){    
+  
       $("#pay").click(function() {
 
       const nationalid = $('#national').val().trim();
