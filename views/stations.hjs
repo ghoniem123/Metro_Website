@@ -17,16 +17,16 @@
         }
     
       $("#body").on("click" ,".delete",function() {
-     console.log('stationId')
 
         const stationId = $(this).attr("id");
-        $(this).parent().parent().remove()
+   //     $(this).parent().parent().remove()
         $.ajax({
           type: "DELETE",
           url: `/api/v1/station/${stationId}`,
           success: function(serverResponse) {
             if(serverResponse) {
               alert('Station deleted');
+              location.href="/manage/stations";
           }
           },
           error: function(errorResponse) {
@@ -86,10 +86,10 @@
                 <td style="text-align: center">{{stationstatus}}</td>
                 <td style="text-align: center">{{tripdate}}</td>
                 <td style="text-align: center">
-                <button id={{id}} class="btn btn-danger delete" type="submit" >Delete</button>
+                <button id={{id}} class="btn btn-danger delete" type="button" >Delete</button>
                 </td>
                 <td style="text-align: center">
-                 <button id={{id}} class="btn btn-primary update" type="submit" >update</button>
+                 <button id={{id}} class="btn btn-primary update" type="submit" >Update</button>
                 </td>
             </tr>
             {{/stations}}

@@ -149,7 +149,7 @@ module.exports = function (app) {
   const stationtype = stationExists[0]["stationtype"];
   const stationposition = stationExists[0]["stationposition"];
 
-  if (stationposition=="start"){
+  if (stationposition.trim()=="start"){
 
     let nextStationID ="";
     const stationroutes = await db
@@ -157,67 +157,86 @@ module.exports = function (app) {
     .from("se_project.stationroutes")
     .where("stationid", stationID);
 
-    for (let i = 0; i < stationroutes.length; i++) {
+    if(isEmpty(stationroutes)){
+      await db("se_project.stations").where("id", stationID).del();
+       return res.status(200).json("Station deleted successfully");
+   }
 
-    const route =stationroutes[i]["routeid"];
+    const route =stationroutes[0]["routeid"];
 
     let nextID = await db
-    .select("tostationid")
+    .select("*")
     .from("se_project.routes")
     .where("id",route )
-    .where("fromstationid", stationID);
+    .where("fromstationid", stationID)
+    .orWhere("tostationid", stationID)
+
     
     if (!isEmpty(nextID))
+       if (nextID[0]["tostationid"]==stationID)
+       nextStationID=nextID[0]["fromstationid"];
+      else if (nextID[0]["fromstationid"]==stationID)
       nextStationID=nextID[0]["tostationid"];
+     else {
+        await db("se_project.stations").where("id", stationID).del();
+         return res.status(200).json("Station deleted successfully");
+     }
 
-    }
 
-    const updatedStation = await db("se_project.stations")
+     await db("se_project.stations")
       .where("id", nextStationID)
       .update({
         stationposition : "start"
       });
 
-      const deletedStation = await db("se_project.stations").where("id", stationID).del();
+      await db("se_project.stations").where("id", stationID).del();
   
       return res.status(200).json("Station deleted successfully");
 
   }
-  else if (stationposition=="end"){
-
+  else if (stationposition.trim()=="end"){
     let prevStationID ="";
     const stationroutes = await db
     .select("routeid")
     .from("se_project.stationroutes")
     .where("stationid", stationID);
 
-    for (let i = 0; i < stationroutes.length; i++) {
 
-    const route =stationroutes[i]["routeid"];
+   if(isEmpty(stationroutes)){
+      await db("se_project.stations").where("id", stationID).del();
+       return res.status(200).json("Station deleted successfully");
+   }
+
+
+    const route =stationroutes[0]["routeid"];
 
     let prevID = await db
-    .select("fromstationid")
+    .select("*")
     .from("se_project.routes")
     .where("id",route )
-    .where("tostationid", stationID);
+    .where("fromstationid", stationID)
+    .orWhere("tostationid", stationID)
     
     if (!isEmpty(prevID))
+       if (prevID[0]["tostationid"]==stationID)
       prevStationID=prevID[0]["fromstationid"];
+      else if (prevID[0]["fromstationid"]==stationID)
+      prevStationID=prevID[0]["tostationid"];
+  
 
-    }
-
-    const updatedStation = await db("se_project.stations")
+     await db("se_project.stations")
       .where("id", prevStationID)
       .update({
         stationposition : "end"
       });
 
-      const deletedStation = await db("se_project.stations").where("id", stationID).del();
+       await db("se_project.stations").where("id", stationID).del();
   
       return res.status(200).json("Station deleted successfully");
   }
-  else {
-     if (stationtype == "normal"){
+  else if(stationposition.trim()=="middle") {
+
+     if (stationtype.trim() == "normal"){
             
       let prev_next_stations=[];
 
@@ -335,7 +354,11 @@ module.exports = function (app) {
             { routename: `hi${newTransferStationID}${station_2[0]["id"]}`, fromstationid: newTransferStationID, tostationid: station_2[0]["id"] },
             { routename: `hi${station_2[0]["id"]}${newTransferStationID}`, fromstationid: station_2[0]["id"], tostationid: newTransferStationID }
           ];
-  
+    
+        console.log(newTransferStationID);
+        console.log(station_1);
+        console.log(station_2);
+
           const newRouteIDs=[];
   
           for (let i = 0; i < routes.length; i++) {
@@ -362,7 +385,7 @@ module.exports = function (app) {
             await db("se_project.stationroutes").insert(element);
           }
         
-          const updatedStation = await db("se_project.stations")
+           await db("se_project.stations")
            .where("id", newTransferStationID)
            .update({
            stationtype : "transfer"
@@ -407,7 +430,7 @@ module.exports = function (app) {
             await db("se_project.stationroutes").insert(element);
           }
         
-          const updatedStation = await db("se_project.stations")
+           await db("se_project.stations")
            .where("id", newTransferStationID)
            .update({
            stationtype : "transfer"
@@ -451,7 +474,7 @@ module.exports = function (app) {
             await db("se_project.stationroutes").insert(element);
           }
         
-          const updatedStation = await db("se_project.stations")
+          await db("se_project.stations")
            .where("id", newTransferStationID)
            .update({
            stationtype : "transfer"
