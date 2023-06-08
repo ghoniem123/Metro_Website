@@ -15,29 +15,39 @@
         if (!sessionToken) {
           location.href = '/';
         }
+
+          $('#connected').val('');
+          $('#newly').val('');
   
       $("#submit").click(function() {
 
-      const stationname = $('#station_name').val().trim();
+      const routeName = $('#route_name').val().trim();
+      const newStationId =$("#newly option:selected").attr("id");  
+      const connectedStationId = $("#connected option:selected").attr("id");  
 
          const data = {
-            stationname,
+            routeName,
+            newStationId,
+            connectedStationId,
           };
 
         $.ajax({
           type: "POST",
-          url: `/api/v1/station`,
+          url: `/api/v1/route`,
           data,
           success: function(serverResponse) {
             if(serverResponse) {
-              alert('station created');
+              alert('route created');
             }
-              $('#station_name').val("");
+              location.href="/manage/routes/create"
           },
           error: function(errorResponse) {
             if(errorResponse) {
               alert(`Error : ${errorResponse.responseText}`);
-            }            
+            }  
+             $('#route_name').val("");
+               $('#connected').val('');
+               $('#newly').val('');          
           }
         });
       });      
@@ -59,13 +69,30 @@
     </div>
     <div style="padding-left:20px">
     <form>
-   <h3><u>Create Station</u></h3>
+   <h3><u>Create Route</u></h3>
    <br>
    <div>
-    <label for="station_name">Station Name : </label>
-    <input id="station_name" name="Station Name" type="text" placeholder="Station Name" >
+    <label for="station_name">Route Name : </label>
+    <input id="route_name" name="Route Name" type="text" placeholder="Route Name" >
     <br>
-    <input id="submit"type="submit" value="Create">
+    <br>
+     <div>
+      <label for="origin" class="control-label">New station : </label>
+          <select id="newly">
+            {{#newly}}
+            <option id={{id}}>{{stationname}}</option>
+            {{/newly}}
+          </select>
+      </div>
+      <div>
+       <label for="destination" class=" control-label">Station to connect with: </label>
+          <select id="connected">
+            {{#stations}}
+            <option id={{id}}>{{stationname}}</option>
+            {{/stations}}
+          </select>
+      </div>
+    <input id="submit"type="button" value="Create">
    </div>
 
    </form>

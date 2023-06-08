@@ -10,44 +10,47 @@
   </head>
   <body>
     <script>
-      $(document).ready(function() {
+        $(document).ready(function() {
         const sessionToken = document.cookie.includes('session_token');
         if (!sessionToken) {
           location.href = '/';
         }
-  
-      $("#submit").click(function() {
+    
+      $("#update").click(function() {
 
-      const stationname = $('#station_name').val().trim();
+      const routeName = $("#name").val();
+      const routeId = {{routeID}};
 
-         const data = {
-            stationname,
-          };
-
+      const data={
+        routeName,
+      }
+    
         $.ajax({
-          type: "POST",
-          url: `/api/v1/station`,
+          type: "PUT",
+          url: `/api/v1/route/${routeId}`,
           data,
           success: function(serverResponse) {
             if(serverResponse) {
-              alert('station created');
-            }
-              $('#station_name').val("");
+              alert('Route updated');
+              location.href="/manage/routes";
+          }
           },
           error: function(errorResponse) {
             if(errorResponse) {
               alert(`Error : ${errorResponse.responseText}`);
-            }            
-          }
+              }            
+            }
+          });
         });
-      });      
-    });
+          });
+
+   
     </script>
      <div>
       <nav class="navbar navbar-inverse" style="padding-left:20px; padding-right:20px">
           <ul class="nav navbar-nav">
            <li ><a href="/dashboard">Home</a></li>
-              <li><a href="/manage/stations">Stations</a></li>
+            <li><a href="/manage/stations">Stations</a></li>
             <li><a href="/manage/routes">Routes</a></li>
             <li><a href="/manage/zones">Zones</a></li>
             <li><a href="/manage/requests/refunds">Refund Requests</a></li>
@@ -57,18 +60,19 @@
           </ul>
       </nav>
     </div>
-    <div style="padding-left:20px">
-    <form>
-   <h3><u>Create Station</u></h3>
-   <br>
-   <div>
-    <label for="station_name">Station Name : </label>
-    <input id="station_name" name="Station Name" type="text" placeholder="Station Name" >
-    <br>
-    <input id="submit"type="submit" value="Create">
-   </div>
 
-   </form>
-   </div>
+    <div style="padding-left:20px;">
+<form class="form-horizontal" style="width: 50%;" >
+    <div>
+        <h3><u>Update route</u></h3>
+    </div>
+      <div class="form-group" style="padding-left:20px;">
+<label for="name">Route name : </label>
+<input type="text" id="name" placeholder="Route name">
+<br>
+<button id="update">Upate</button>
+      </div>
+  </form>
+    </div>
   </body>
 </html>

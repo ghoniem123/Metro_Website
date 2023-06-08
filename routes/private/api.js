@@ -74,6 +74,9 @@ module.exports = function (app) {
   });
 
   app.put("/api/v1/station/:stationId",  async function (req, res) {
+    if (!req.body.stationName) {
+      return res.status(400).send("name is required");
+    }
     try{  
     const stationID = req.params.stationId;
     const stationExists = await db
@@ -497,6 +500,14 @@ module.exports = function (app) {
   });
   app.post("/api/v1/route", async function (req, res){
 
+    if (!req.body.routeName) {
+      return res.status(400).send("route name is required");
+    } if (!req.body.newStationId) {
+      return res.status(400).send("new station name is required");
+    } if (!req.body.connectedStationId) {
+      return res.status(400).send("connected station name is required");
+    }
+
     try{
       const stationExist_1 = await db
       .select("*")
@@ -556,7 +567,8 @@ module.exports = function (app) {
      await db("se_project.stations")
     .where("id",req.body.newStationId)
     .update({
-      stationposition:station_position[0]["stationposition"]
+      stationposition:station_position[0]["stationposition"],
+      stationstatus:"old"
     });
 
     return res.status(200).json("routes created successfully");
@@ -569,6 +581,9 @@ module.exports = function (app) {
   });
 
   app.put("/api/v1/route/:routeId",  async function (req, res) {
+    if (!req.body.routeName) {
+      return res.status(400).send("name is required");
+    }
     try{  
     const routeID = req.params.routeId;
     const routeExists = await db
@@ -1779,6 +1794,12 @@ app.put("/api/v1/password/reset",async function (req, res){
 
  app.put("/api/v1/zones/:zoneId",async function(req,res){
   try{
+
+    if (!req.body.price) {
+      return res.status(400).send("price is required");
+    } if (!req.params.zoneId ) {
+      return res.status(400).send("zone number is required");
+    }
     
     const price =req.body.price;
     const zoneID = req.params.zoneId;

@@ -103,10 +103,17 @@ module.exports = function(app) {
   });
 
 
-  app.get('/manage/stations/edit', async function(req, res) {
+  app.get('/manage/stations/edit/:stationId', async function(req, res) {
     const user = await getUser(req);
-    const stationID = req.query.stationId;
-    return res.render('updateStation', {user,stationID});
+    const stationID = req.params.stationId;
+    console.log(stationID);
+    return res.render('update_Station', {user,stationID});
+  });
+
+  app.get('/manage/routes/edit/:routeId', async function(req, res) {
+    const user = await getUser(req);
+    const routeID = req.params.routeId;
+    return res.render('updateRoute', {user,routeID});
   });
 
 
@@ -114,6 +121,57 @@ module.exports = function(app) {
     const user = await getUser(req);
     const senior = await db.select('*').from('se_project.senior_requests').where("userid",user.userid );
     return res.render('seniorrequest',{senior,user});
+  });
+
+  app.get('/manage/routes', async function(req, res) {
+    const user = await getUser(req);
+    const routes = await db.select('routes.id','routes.routename','station1.stationname as from','station2.stationname as to').from('se_project.routes as routes')
+    .join('se_project.stations as station1','station1.id','routes.fromstationid')
+    .join('se_project.stations as station2','station2.id','routes.tostationid');
+    return res.render('routes', {user, routes });
+  });
+
+  app.get('/manage/routes/create', async function(req, res) {
+    const user = await getUser(req);
+    const newly = await db.select('*').from('se_project.stations').where("stationstatus","new");
+    const stations = await db.select('*').from('se_project.stations').where("stationstatus","old").where("stationposition","end").orWhere("stationposition","start");
+    return res.render('createRoute', {user,stations,newly});
+  });
+
+  app.get('/manage/requests/refunds', async function(req, res) {
+    const user = await getUser(req);
+    const pending = await db.select('se_project.refund_requests.id', 'status','refundamount','tripdate',"se_project.users.firstname","se_project.users.lastname").from('se_project.refund_requests')
+    .join('se_project.tickets','se_project.tickets.id','se_project.refund_requests.ticketid').join("se_project.users","se_project.users.id","se_project.refund_requests.userid").where("se_project.refund_requests.status","pending");
+
+    const accepted = await db.select('se_project.refund_requests.id', 'status','refundamount','tripdate',"se_project.users.firstname","se_project.users.lastname").from('se_project.refund_requests')
+    .join('se_project.tickets','se_project.tickets.id','se_project.refund_requests.ticketid').join("se_project.users","se_project.users.id","se_project.refund_requests.userid").where("se_project.refund_requests.status","Accept");
+
+    const rejected =  await db.select('se_project.refund_requests.id', 'status','refundamount','tripdate',"se_project.users.firstname","se_project.users.lastname").from('se_project.refund_requests')
+    .join('se_project.tickets','se_project.tickets.id','se_project.refund_requests.ticketid').join("se_project.users","se_project.users.id","se_project.refund_requests.userid").where("se_project.refund_requests.status","Reject");
+
+    return res.render('refund', {user,pending,accepted,rejected});
+  });
+
+  app.get('/manage/requests/seniors', async function(req, res) {
+    const user = await getUser(req);
+    const pending = await db.select('se_project.senior_requests.id', 'status','nationalid',"se_project.users.firstname","se_project.users.lastname").from('se_project.senior_requests')
+   .join("se_project.users","se_project.users.id","se_project.senior_requests.userid").where("se_project.senior_requests.status","pending");
+
+    const accepted =await db.select('se_project.senior_requests.id', 'status','nationalid',"se_project.users.firstname","se_project.users.lastname").from('se_project.senior_requests')
+    .join("se_project.users","se_project.users.id","se_project.senior_requests.userid").where("se_project.senior_requests.status","Accept");
+
+    const rejected =await db.select('se_project.senior_requests.id', 'status','nationalid',"se_project.users.firstname","se_project.users.lastname").from('se_project.senior_requests')
+    .join("se_project.users","se_project.users.id","se_project.senior_requests.userid").where("se_project.senior_requests.status","Reject");
+
+    return res.render('senior', {user,pending,accepted,rejected});
+  });
+
+  app.get('/manage/zones', async function(req, res) {
+    const user = await getUser(req);
+    const zone1 = await db.select('*').from('se_project.zones').where("id","1");
+    const zone2 = await db.select('*').from('se_project.zones').where("id","2");
+    const zone3 = await db.select('*').from('se_project.zones').where("id","3");
+    return res.render('zones',{zone1,zone2,zone3,user});
   });
 
 };

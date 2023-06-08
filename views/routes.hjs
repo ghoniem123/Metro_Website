@@ -16,17 +16,24 @@
           location.href = '/';
         }
     
+         $(window).scroll(function() { 
+  if ($(this).scrollTop() > 50) { 
+    $('#navbar').fadeOut(); 
+  } else { 
+    $('#navbar').fadeIn(); 
+  } 
+});
+
       $("#body").on("click" ,".delete",function() {
 
-        const stationId = $(this).attr("id");
-   //     $(this).parent().parent().remove()
+        const routeId = $(this).attr("id");
         $.ajax({
           type: "DELETE",
-          url: `/api/v1/station/${stationId}`,
+          url: `/api/v1/route/${routeId}`,
           success: function(serverResponse) {
             if(serverResponse) {
-              alert('Station deleted');
-              location.href="/manage/stations";
+              alert('Route deleted');
+              location.href="/manage/routes";
           }
           },
           error: function(errorResponse) {
@@ -38,24 +45,22 @@
         });
 
    
-      $("#body").on("click" ,".update",function() {
-        const stationId = $(this).attr("id");
-      // location.href=`/manage/stations/edit/${stationId}`;
-
-      const stationName = $(`#name${stationId}`).val();
+     $("#body").on("click" ,".update",function() {
+        const routeId = $(this).attr("id");
+       const routeName = $(`#name${routeId}`).val();
 
       const data={
-        stationName,
+        routeName,
       }
     
         $.ajax({
           type: "PUT",
-          url: `/api/v1/station/${stationId}`,
+          url: `/api/v1/route/${routeId}`,
           data,
           success: function(serverResponse) {
             if(serverResponse) {
-              alert('station updated');
-              location.href="/manage/stations";
+              alert('Route updated');
+              location.href="/manage/routes";
           }
           },
           error: function(errorResponse) {
@@ -73,8 +78,8 @@
       <nav class="navbar navbar-inverse" style="padding-left:20px; padding-right:20px">
           <ul class="nav navbar-nav">
            <li ><a href="/dashboard">Home</a></li>
-            <li class="active"><a href="/manage/stations">Stations</a></li>
-            <li><a href="/manage/routes">Routes</a></li>
+            <li ><a href="/manage/stations">Stations</a></li>
+            <li class="active"><a href="/manage/routes">Routes</a></li>
             <li><a href="/manage/zones">Zones</a></li>
             <li><a href="/manage/requests/refunds">Refund Requests</a></li>
              <li><a href="/manage/requests/seniors">Senior Requests</a></li>
@@ -87,44 +92,41 @@
 <form class="form-horizontal" style="width: 50%;" >
     <div style="padding-left:20px;">
     <div>
-        <h3><u>Stations</u></h3>
+        <h3><u>Routes</u></h3>
     </div>
       <div >
           <table style="bgcolor:black; width:100%; " align="center">
             <thead>
             <tr>
-             <th style="text-align: center"> station name </th>
-                <th style="text-align: center">station type </th>
-                <th style="text-align: center">station position</th>
-                <th style="text-align: center">station status</th>
+             <th style="text-align: center"> Route name </th>
+                <th style="text-align: center">from station name </th>
+                <th style="text-align: center">to station name</th>
             </tr>
             </thead>
             <tbody id="body">
-              {{#stations}}
+              {{#routes}}
             <tr>
-                <td style="text-align: center">{{stationname}}</td>
-                <td style="text-align: center">{{stationtype}}</td>
-                <td style="text-align: center">{{stationposition}}</td>
-                <td style="text-align: center">{{stationstatus}}</td>
-                <td style="text-align: center">{{tripdate}}</td>
+                <td style="text-align: center">{{routename}}</td>
+                <td style="text-align: center">{{from}}</td>
+                <td style="text-align: center">{{to}}</td>
                 <td style="text-align: center">
                 <button id={{id}} class="btn btn-danger delete" type="button" >Delete</button>
                 </td>
-                <td style="text-align: center">
+               <td style="text-align: center">
                  <button id={{id}} class="btn btn-primary update" type="button" >Update</button>
                 </td>
                 <td>
-                  <input type="text" id="name{{id}}" placeholder="Station name">
+                  <input type="text" id="name{{id}}" placeholder="Route name">
                 </td>
             </tr>
-            {{/stations}}
+            {{/routes}}
            </tbody>
           </table>
       </div>
       <br>
       <div class="form-group">
           <div>
-              To create a new station <a href="/manage/stations/create">click here.</a>
+              To create a new station <a href="/manage/routes/create">click here.</a>
           </div>
       </div>
   </form>
