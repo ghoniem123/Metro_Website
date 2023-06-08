@@ -62,7 +62,6 @@
     <form>
    <h3><u>Create Station</u></h3>
    <br>
-   <br>
    <div>
     <label for="station_name">Station Name : </label>
     <input id="station_name" name="Station Name" type="text" placeholder="Station Name" >
