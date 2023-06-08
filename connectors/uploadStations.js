@@ -223,29 +223,6 @@ async function uploadR1() {
     { routename: "el marg - ezbet el nakhl", fromstationid: 34, tostationid: 33 },
     { routename: "el marg - new marg", fromstationid: 34, tostationid: 35 },
     { routename: "new marg - el marg", fromstationid: 35, tostationid: 34 },
-
-
-
-
-
-
-
-
-
-
-
-
-
-  ];
-
-for (let i = 0; i < routes.length; i++) {
-  const element =routes[i];
-  await db("se_project.routes").insert(element).returning("*");
-}
-}
-
-async function uploadR1() {
-  let routes = [
     { routename: "helwan - ain helwan", fromstationid: 1, tostationid: 2 },
     { routename: "ain helwan - helwan", fromstationid: 2, tostationid: 1 },
     { routename: "helwan university - ain helwan", fromstationid: 3, tostationid: 2 },
@@ -280,28 +257,24 @@ async function uploadR1() {
     { routename: "el sayeda zeinab - el malek el saleh", fromstationid: 17, tostationid: 16 },
     { routename: "el sayeda zeinab - saad zaghloul", fromstationid: 17, tostationid: 18 },
     { routename: "saad zaghloul - el sayeda zeinab", fromstationid: 18, tostationid: 17 },
-
     { routename: "saad zaghloul - sadat", fromstationid: 18, tostationid: 19 },
     { routename: "sadat - saad zaghloul", fromstationid: 19, tostationid: 18 },
     { routename: "sadat - opera", fromstationid: 19, tostationid: 83 },
     { routename: "opera - sadat", fromstationid: 83, tostationid: 19 },
     { routename: "sadat - mohamed naguib", fromstationid: 19, tostationid:84  },
     { routename: "mohamed naguib - sadat", fromstationid:84 , tostationid: 19 },
-
     { routename: "nasser- sadat", fromstationid:20 , tostationid: 19 },
     { routename: "sadat - nasser", fromstationid:19 , tostationid: 20 },
     { routename: "mohamed naguib - attaba", fromstationid:20 , tostationid: 61 },
     { routename: "attaba - mohamed naguib", fromstationid:61 , tostationid: 20 },
     { routename: "mohamed naguib - sadat", fromstationid:84 , tostationid: 19 },
     { routename: "mohamed naguib - sadat", fromstationid:84 , tostationid: 19 },
-
     { routename: "el shohadaa - massara", fromstationid:22 , tostationid: 42 },
     { routename: "massara - el shohadaa", fromstationid:42 , tostationid: 22 },
     { routename: "massara - rod el farag", fromstationid:42 , tostationid: 41 },
     { routename: "rod el farag - massara", fromstationid:41 , tostationid: 42 },
     { routename: "rod el farag - st teresa", fromstationid:41 , tostationid: 40 },
     { routename: " st teresa- rod el farag", fromstationid:40 , tostationid: 41 },
-
     { routename: "st teresa - khalafawy", fromstationid:40 , tostationid: 39 },
     { routename: "khalafawy - st teresa", fromstationid:39 , tostationid: 40 },
     { routename: "khalafawy - mezallat", fromstationid:39 , tostationid: 38 },
@@ -576,17 +549,6 @@ async function uploadS1() {
       stationposition: "middle",
       stationstatus: "old",
     },
-
-  ];
-  for (let i = 0; i < stations.length; i++) {
-    const element =stations[i];
-    await db("se_project.stations").insert(element).returning("*");
-  }
-}
-
-
-async function uploadS2() {
-  let stations = [
     {
       stationname: "Adly Mansour",
       stationtype: "normal",
@@ -815,6 +777,7 @@ async function uploadS2() {
     await db("se_project.stations").insert(element).returning("*");
   }
 }
-//uploadS();// first to run
-//uploadR(); //second
+
+//uploadS1();// first to run
+uploadR1(); //second
 //uploadSR(); //third
