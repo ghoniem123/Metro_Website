@@ -106,6 +106,272 @@ async function uploadR() {
     await db("se_project.routes").insert(element).returning("*");
   }
 }
+
+
+async function uploadS() {
+  let stations = [
+    {
+      stationname: "Helwan",
+      stationtype: "normal",
+      stationposition: "start",
+      stationstatus: "old",
+    },
+    {
+      stationname: "Ain Helwan",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "Helwan university",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "Wadi Haf",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "Hadayek Helwan",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "El masraa",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "Tura El-Esmant",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "Kozzika",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "Tora El-Balad",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "Sakanat El-Maadi",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "Maadi",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "Hadayek El-Maadi",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "Dar El-salam",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+
+    {
+      stationname: "El-Zahraa",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+
+    {
+      stationname: "Mar Girgis",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "El-Malek El-Saleh",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "Al-Sayeda Zeinab",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    }, 
+     {
+      stationname: "Saad Zaghloul",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "Sadat",
+      stationtype: "transfer",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "Nasser",
+      stationtype: "transfer",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "Orabi",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "Al-Shohadaa",
+      stationtype: "transfer",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "Ghamra",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "El-Demerdash",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "Manshiet El-Sadr",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "Kobri El-Qobba",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "Hammamat El-Qobba",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "Saray El-Qobba",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "Hadayeq El-Zaitoun",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "Helmeyet El-Zaitoun",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "El-Matareyya",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "Ain Shams",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "Ezbet El-Nakhl",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "El-Marg",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "New Marg",
+      stationtype: "normal",
+      stationposition: "end",
+      stationstatus: "old",
+    },
+    {
+      stationname: "Shubra Al Khaimah",
+      stationtype: "normal",
+      stationposition: "end",
+      stationstatus: "old",
+    },
+    {
+      stationname: "Koliet El-Zeraa",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "Mezallat",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "Khalafawy",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "St. Teresa",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "Rod El-Farag",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "Masarra",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+
+  ];
+  for (let i = 0; i < stations.length; i++) {
+    const element =stations[i];
+    await db("se_project.stations").insert(element).returning("*");
+  }
+}
+
 //uploadS();// first to run
 //uploadR(); //second
-uploadSR(); //third
+//uploadSR(); //third
