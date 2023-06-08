@@ -15,14 +15,6 @@
         if (!sessionToken) {
           location.href = '/';
         }
-    
-         $(window).scroll(function() { 
-  if ($(this).scrollTop() > 50) { 
-    $('#navbar').fadeOut(); 
-  } else { 
-    $('#navbar').fadeIn(); 
-  } 
-});
 
       $("#body").on("click" ,".delete",function() {
 
