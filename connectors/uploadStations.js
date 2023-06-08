@@ -106,6 +106,237 @@ async function uploadR() {
     await db("se_project.routes").insert(element).returning("*");
   }
 }
+
+async function uploadS2() {
+  let stations = [
+    {
+      stationname: "Adly Mansour",
+      stationtype: "normal",
+      stationposition: "start",
+      stationstatus: "old",
+    },
+    {
+      stationname: "Haykestep",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "Omar Ibn El khattab",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "Qubaa",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "Hesham Barakat",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "El Nozha",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "El Shams Club",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "Alf Maskan",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    }, {
+      stationname: "Helioples",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    }, {
+      stationname: "Haroun",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    }, {
+      stationname: "Al-Ahram",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    }, {
+      stationname: "Koleyet El-Banat",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "Stadium",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    }, {
+      stationname: "Fair Zone",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    }, {
+      stationname: "Abbassiya",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    }, {
+      stationname: "Abdou Pasha",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "El-Geish",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    }, {
+      stationname: "Bab El Shaariya",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    }, {
+      stationname: "Attaba",
+      stationtype: "transfer",
+      stationposition: "middle",
+      stationstatus: "old",
+    }, {
+      stationname: "Maspero",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "Safaa Hijazy",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    }, {
+      stationname: "Kit-Kat",
+      stationtype: "transfer",
+      stationposition: "middle",
+      stationstatus: "old",
+    }, {
+      stationname: "Sudan",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+    {
+      stationname: "Imbaba",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    }, {
+      stationname: "El-Bohy",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    }, {
+      stationname: "El-Qawmia",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    }, {
+      stationname: "Ring Road",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    }, {
+      stationname: "Rod El Farag Corridor",
+      stationtype: "normal",
+      stationposition: "end",
+      stationstatus: "old",
+    }, {
+      stationname: "Tawfikia",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    }, {
+      stationname: "Wadi El Nile",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    }, {
+      stationname: "Gamet El Dowel",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    }, {
+      stationname: "Boulak El Dakrour",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    }, {
+      stationname: "Cairo University",
+      stationtype: "transfer",
+      stationposition: "middle",
+      stationstatus: "old",
+    }, {
+      stationname: "Faisal",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    }, {
+      stationname: "Giza",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    }, {
+      stationname: "Omm El-Masryeen",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    }, {
+      stationname: "Sakiat Mekky",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    }, {
+      stationname: "El Monib",
+      stationtype: "normal",
+      stationposition: "start",
+      stationstatus: "old",
+    }, {
+      stationname: "El Bohth",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    }, {
+      stationname: "Dokki",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    }, {
+      stationname: "Opera",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    }, {
+      stationname: "Mohamed Naguib",
+      stationtype: "normal",
+      stationposition: "middle",
+      stationstatus: "old",
+    },
+  ];
+  for (let i = 0; i < stations.length; i++) {
+    const element =stations[i];
+    await db("se_project.stations").insert(element).returning("*");
+  }
+}
 //uploadS();// first to run
 //uploadR(); //second
 uploadSR(); //third

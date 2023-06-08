@@ -10,7 +10,7 @@ const config = {
     host: 'localhost',
     port: 5432,
     user: 'postgres',
-    password: 'rawannpms2003',
+    password: 'rawan2003',
     database: 'postgres',
   }
 };
