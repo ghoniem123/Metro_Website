@@ -108,7 +108,7 @@ async function uploadR() {
 }
 
 
-async function uploadS() {
+async function uploadS1() {
   let stations = [
     {
       stationname: "Helwan",
