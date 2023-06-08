@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-      <meta charset="UTF-8">
-      <meta http-equiv="x-ua-comaptible" content="ie=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Metro</title>
+    <head>
       <link rel='stylesheet' href='/styles/bootstrap.min.css' />
       <link rel='stylesheet' href='/styles/style.css' />
       <script src="/js/jquery-2.2.0.min.js" type="text/javascript"></script>
       <script src="/js/bootstrap.min.js" type="text/javascript"></script>
+      </head>
   </head>
   <body>
       <script>
