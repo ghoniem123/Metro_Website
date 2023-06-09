@@ -15,15 +15,37 @@
         if (!sessionToken) {
           location.href = '/';
         }
+
+        $("#body").on("click" ,".refund",function() {
+        const ticketId = $(this).attr("id");
+
+
+      $.ajax({
+          type: "POST",
+          url: `/api/v1/refund/${ticketId}`,
+          success: function(serverResponse) {
+            if(serverResponse) {
+              alert('Request sent');
+            }
+              $('#ticket').val("");
+          },
+          error: function(errorResponse) {
+            if(errorResponse) {
+              alert(`Error : ${errorResponse.responseText}`);
+            }            
+          }
+        });
+      });      
+
       });
    </script>
      <div>
       <nav class="navbar navbar-inverse" style="padding-left:20px; padding-right:20px">
           <ul class="nav navbar-nav">
-           <li ><a href="/dashboard">Home</a></li>
+           <li ><a href="/dashboard">Map</a></li>
 
             <li><a href="/subscriptions">Subscriptions</a></li>
-            <li><a href="/tickets">Tickets</a></li>
+            <li class="active"><a href="/tickets">Tickets</a></li>
             <li><a href="/prices">Prices</a></li>
             <li><a href="/rides">Rides</a></li>
             <li><a href="/requests/senior">Senior Request</a></li>
@@ -37,33 +59,40 @@
 <div style ="padding-left:20px">
        <form class="form-horizontal" style="width: 50%;">
     <div>
-        <h3><u>Your tickets</u></h3>
+        <h3><u>My tickets</u></h3>
     </div>
       <div >
-          <table style="bgcolor:black; width:100%; " align="center">
+          <table style="bgcolor:black; width:140%; " align="center">
             <thead>
             <tr>
-              <th style="text-align: center">Ticket ID </th>
                 <th style="text-align: center">Origin station </th>
                 <th style="text-align: center">Destination station</th>
                 <th style="text-align: center">Subscription id if used</th>
                 <th style="text-align: center">Trip date</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="body">
               {{#ticket}}
             <tr>
-                <td style="text-align: center">{{id}}</td>
                 <td style="text-align: center">{{origin}}</td>
                 <td style="text-align: center">{{destination}}</td>
                 <td style="text-align: center">{{subid}}</td>
                 <td style="text-align: center">{{tripdate}}</td>
+                 <td style="text-align: center">
+                 <button id={{id}} class="btn btn-primary refund" type="button" >Refund</button>
+                </td>
             </tr>
             {{/ticket}}
            </tbody>
           </table>
       </div>
       </form>
+      <br>
+       <div class="form-group">
+          <div >
+              To purchase a ticket <a href="/tickets/purchase">click here.</a> Or to purchase using subscription<a href="/tickets/purchase/subscription"> click here.</a>
+          </div>
+      </div>
 </div>
   </body>
 </html>

@@ -15,6 +15,61 @@
         if (!sessionToken) {
           location.href = '/';
         }
+
+           $.ajax({
+            type: "GET",
+            url: '/api/v1/zones',
+            success: function(serverResponse) {
+              if(serverResponse) {
+   if(serverResponse[0].id==1){
+    document.getElementById("1").innerHTML =serverResponse[0].id;
+  document.getElementById("1_s").innerHTML =serverResponse[0].zonetype;
+   document.getElementById("1_p").innerHTML =serverResponse[0].price;
+   }
+   if(serverResponse[0].id==2){
+    document.getElementById("2").innerHTML =serverResponse[0].id;
+  document.getElementById("2_s").innerHTML =serverResponse[0].zonetype;
+   document.getElementById("2_p").innerHTML =serverResponse[0].price;
+   }
+    if(serverResponse[0].id==3){
+    document.getElementById("3").innerHTML =serverResponse[0].id;
+  document.getElementById("3_s").innerHTML =serverResponse[0].zonetype;
+   document.getElementById("3_p").innerHTML =serverResponse[0].price;
+   }  if(serverResponse[1].id==1){
+    document.getElementById("1").innerHTML =serverResponse[1].id;
+  document.getElementById("1_s").innerHTML =serverResponse[1].zonetype;
+   document.getElementById("1_p").innerHTML =serverResponse[1].price;
+   }  if(serverResponse[1].id==2){
+    document.getElementById("2").innerHTML =serverResponse[1].id;
+  document.getElementById("2_s").innerHTML =serverResponse[1].zonetype;
+   document.getElementById("2_p").innerHTML =serverResponse[1].price;
+   } if(serverResponse[1].id==3){
+    document.getElementById("3").innerHTML =serverResponse[1].id;
+  document.getElementById("3_s").innerHTML =serverResponse[1].zonetype;
+   document.getElementById("3_p").innerHTML =serverResponse[1].price;
+   } if(serverResponse[2].id==1){
+    document.getElementById("1").innerHTML =serverResponse[2].id;
+  document.getElementById("1_s").innerHTML =serverResponse[2].zonetype;
+   document.getElementById("1_p").innerHTML =serverResponse[2].price;
+   } if(serverResponse[2].id==2){
+    document.getElementById("2").innerHTML =serverResponse[2].id;
+  document.getElementById("2_s").innerHTML =serverResponse[2].zonetype;
+   document.getElementById("2_p").innerHTML =serverResponse[2].price;
+   } if(serverResponse[2].id==3){
+    document.getElementById("3").innerHTML =serverResponse[2].id;
+  document.getElementById("3_s").innerHTML =serverResponse[2].zonetype;
+   document.getElementById("3_p").innerHTML =serverResponse[2].price;
+   }
+              }
+            },
+            error: function(errorResponse) {
+              if(errorResponse) {
+                alert(`Error: ${errorResponse.responseText}`);
+              }            
+            }
+          });
+        
+
         $("#submit").click(function() {
 
           const CreditCardNumber = $('#credit').val();
@@ -53,7 +108,7 @@
      <div>
       <nav class="navbar navbar-inverse" style="padding-left:20px; padding-right:20px">
           <ul class="nav navbar-nav">
-           <li ><a href="/dashboard">Home</a></li>
+           <li ><a href="/dashboard">Map</a></li>
             <li><a href="/subscriptions">Subscriptions</a></li>
             <li><a href="/tickets">Tickets</a></li>
             <li><a href="/prices">Prices</a></li>
@@ -67,6 +122,39 @@
     </div>
 <div style ="padding-left:20px">
   <form class="form-horizontal" style="width: 50%;">
+    <div>
+        <h3><u>Zones data</u></h3>
+    </div>
+      <div >
+          <table style="bgcolor:black; width:100%; " align="center">
+            <tr>
+                <th style="text-align: center">Zone</th>
+                <th style="text-align: center">Number of stations allowed</th>
+                <th style="text-align: center">Price</th>
+            </tr>
+            <tr>
+                <td id="1" style="text-align: center"></td>
+                <td id="1_s" style="text-align: center"></td>
+                <td id="1_p" style="text-align: center"></td>
+            </tr>
+             <tr>
+                <td id="2" style="text-align: center"></td>
+                <td id="2_s" style="text-align: center"></td>
+                <td id="2_p" style="text-align: center"></td>
+            </tr>
+             <tr>
+                <td id="3" style="text-align: center"></td>
+                <td id="3_s" style="text-align: center"></td>
+                <td id="3_p" style="text-align: center"></td>
+            </tr>
+          </table>
+      </div>
+      </form>
+<br>
+  <form class="form-horizontal" style="width: 50%;">
+     <div>
+        <h3><u>Purchase subscriptions</u></h3>
+    </div>
           <div class="form-group">
           <label for="credit" class="col-sm-2 control-label">Credit Card number : </label>
           <div class="col-sm-10">
@@ -88,8 +176,8 @@
           </div>
       </div>
        <form class="form-horizontal" style="width: 50%;">
-          <div class="form-group">
-        <label for="sub" class="col-sm-2 control-label">Subscription type : </label>
+          <div class="form-group" style ="padding-left:20px">
+        <label for="sub" class=" control-label">Subscription type : </label>
           <select id="sub">
             <option>annual</option>
             <option>quarterly</option>
@@ -97,16 +185,17 @@
           </select>
       </div>
        <form class="form-horizontal" style="width: 50%;">
-          <div class="form-group">
-        <label for="zone" class="col-sm-2 control-label">Zone number : </label>
+          <div class="form-group" style ="padding-left:20px">
+        <label for="zone" class=" control-label">Zone number : </label>
           <select id="zone">
             <option>1</option>
             <option>2</option>
             <option>3</option>
           </select>
       </div>
+      <br>
       <div class="form-group">
-          <div class="col-sm-10 col-sm-offset-2">
+          <div style ="padding-left:20px">
               <input id="submit" name="Buy" type="button" value="Buy" class="btn btn-primary">
           </div>
       </div>

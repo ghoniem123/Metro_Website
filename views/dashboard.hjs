@@ -20,7 +20,7 @@
       <div>
         <nav class="navbar navbar-inverse" style="padding-left:20px; padding-right:20px">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="/dashboard">Home</a></li>
+            <li class="active"><a href="/dashboard">Map</a></li>
 
              {{#isAdmin}}
             <li><a href="/manage/stations">Stations</a></li>
@@ -51,8 +51,12 @@
             <li><a href="/">Logout</a></li>
           </ul>
        </nav>
-      </div>
-      <p style="padding-left:20px;" >Welcome {{firstname}}, you are logged in!</p>
+      </div>      
+        
+     <div class="center">
+      <img src="images/metro.jpg">
+    </div>
+    
     </div>
   </body>
   </html>

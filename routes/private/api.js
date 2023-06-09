@@ -743,6 +743,7 @@ module.exports = function (app) {
 
     let currentStationID=nextStationId;
 
+
     const currentStationroutes = await db
     .select("tostationid")
     .from("se_project.routes")
@@ -772,6 +773,7 @@ module.exports = function (app) {
    
 
     let i2=0;
+    let un_defined = false;
 
     while ( i2<currentStationroutes.length  && visistedArray.includes(currentStationroutes[i2]["tostationid"]) )
           i2++;  
@@ -782,6 +784,16 @@ module.exports = function (app) {
             
             index_of_current=routeArray.indexOf(nextStationId);
       
+
+            if(nextStationId==undefined){
+              un_defined=true;
+              nextStationId=routeArray[0];
+              prevStationId=routeArray[1];
+              routeArray=[0];
+              break;
+            }
+
+
             if(nextStationId!=prevStationId && nextStationId!=currentStationID){
                    const ConnectionExists = await db
                    .select("*")
@@ -865,6 +877,8 @@ module.exports = function (app) {
 
             continue;
           }
+          if(un_defined)
+            continue;
 
     if (currentStationroutes[0]==null ){
  
@@ -968,7 +982,20 @@ module.exports = function (app) {
     .where("id", 2);
   }
 
-  return res.status(200).json(price);
+  const user = await getUser(req);
+
+  let checkprice=price[0].price;
+
+  const senior = await db
+  .select("roleid")
+  .from("se_project.users")
+  .where("id", user.userid);
+
+  if (senior[0]["roleid"]==3)
+  checkprice=checkprice*0.5;
+
+
+  return res.status(200).json({checkprice});
    }catch(e){
     console.log(e.message);
       return res.status(400).send("Could not check price");
@@ -1046,6 +1073,8 @@ app.post("/api/v1/payment/ticket",  async function (req, res){
 
     let i2=0;
 
+    let un_defined = false;
+
     while ( i2<currentStationroutes.length  && visistedArray.includes(currentStationroutes[i2]["tostationid"]) )
           i2++;  
        
@@ -1055,6 +1084,16 @@ app.post("/api/v1/payment/ticket",  async function (req, res){
             
             index_of_current=routeArray.indexOf(nextStationId);
       
+
+            if(nextStationId==undefined){
+              un_defined=true;
+              nextStationId=routeArray[0];
+              prevStationId=routeArray[1];
+              routeArray=[0];
+              break;
+            }
+
+
             if(nextStationId!=prevStationId && nextStationId!=currentStationID){
                    const ConnectionExists = await db
                    .select("*")
@@ -1138,6 +1177,8 @@ app.post("/api/v1/payment/ticket",  async function (req, res){
 
             continue;
           }
+          if(un_defined)
+            continue;
 
     if (currentStationroutes[0]==null ){
  
@@ -1399,6 +1440,8 @@ app.post("/api/v1/tickets/purchase/subscription",  async function (req, res){
 
     let i2=0;
 
+    let un_defined = false;
+
     while ( i2<currentStationroutes.length  && visistedArray.includes(currentStationroutes[i2]["tostationid"]) )
           i2++;  
        
@@ -1408,6 +1451,16 @@ app.post("/api/v1/tickets/purchase/subscription",  async function (req, res){
             
             index_of_current=routeArray.indexOf(nextStationId);
       
+
+            if(nextStationId==undefined){
+              un_defined=true;
+              nextStationId=routeArray[0];
+              prevStationId=routeArray[1];
+              routeArray=[0];
+              break;
+            }
+
+
             if(nextStationId!=prevStationId && nextStationId!=currentStationID){
                    const ConnectionExists = await db
                    .select("*")
@@ -1491,7 +1544,8 @@ app.post("/api/v1/tickets/purchase/subscription",  async function (req, res){
 
             continue;
           }
-
+          if(un_defined)
+            continue;
     if (currentStationroutes[0]==null ){
  
       nextStationId=transferStation.pop();

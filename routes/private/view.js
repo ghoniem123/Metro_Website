@@ -53,29 +53,34 @@ module.exports = function(app) {
     return res.render('subscriptions', {user,sub});
   });
   
-  app.get('/buysubscription', async function(req, res) {
+  app.get('/subscriptions/purchase', async function(req, res) {
     const user = await getUser(req);
     return res.render('buysubscription', user);
   });
 
-  app.get('/viewtickets', async function(req, res) {
+  app.get('/tickets', async function(req, res) {
     const user = await getUser(req);
     const ticket = await db.select('*').from('se_project.tickets').where("userid",user.userid );
     return res.render('view_ticket', {user,ticket});
   });
 
-  app.get('/tickets', async function(req, res) {
+  app.get('/tickets/purchase', async function(req, res) {
     const user = await getUser(req);
-    return res.render('tickets',user);
+    const stations = await db.select('*').from('se_project.stations');
+    return res.render('tickets',{user,stations});
   });
-  app.get('/ticket_sub', async function(req, res) {
+  app.get('/tickets/purchase/subscription', async function(req, res) {
     const user = await getUser(req);
-    return res.render('pay_ticket_sub',user);
+    const stations = await db.select('*').from('se_project.stations');
+    const sub = await db.select("*").from('se_project.subsription').where("userid",user.userid);
+    return res.render('pay_ticket_sub',{user,stations,sub});
     
   });
   app.get('/requests/refund', async function(req, res) {
     const user = await getUser(req);
-    const refund = await db.select('*').from('se_project.refund_requests').where("userid",user.userid );
+    const refund = await db.select('se_project.refund_requests.status',"se_project.refund_requests.refundamount","se_project.tickets.origin","se_project.tickets.destination","se_project.tickets.tripdate")
+    .from('se_project.refund_requests').join("se_project.tickets","se_project.tickets.id","se_project.refund_requests.ticketid").where("se_project.refund_requests.userid",user.userid );
+   
     return res.render('refundrequests', {user,refund});
   });
   app.get('/requests/senior', async function(req, res) {
@@ -83,6 +88,7 @@ module.exports = function(app) {
     const senior = await db.select('*').from('se_project.senior_requests').where("userid",user.userid );
     return res.render('seniorrequest',{senior,user});
   });
+
   app.get('/rises/simulate', async function(req, res) {
     const user = await getUser(req);
     const upcoming = await db.select('*').from('se_project.rides').where("userid",user.userid ).where("status","upcoming");
@@ -116,12 +122,6 @@ module.exports = function(app) {
     return res.render('updateRoute', {user,routeID});
   });
 
-
-  app.get('/requests/senior', async function(req, res) {
-    const user = await getUser(req);
-    const senior = await db.select('*').from('se_project.senior_requests').where("userid",user.userid );
-    return res.render('seniorrequest',{senior,user});
-  });
 
   app.get('/manage/routes', async function(req, res) {
     const user = await getUser(req);
