@@ -62,11 +62,14 @@
       <div class="form-group">
           <div>
             <br>
-             To buy subscriptions <a href="/subscriptions/purchase">
+              To buy a subscription<a href="/subscriptions/purchase">
               click here
              </a>
+              <a href="/subscriptions/purchase" >
+              <button  style="border-radius: 20px; color: #6a706e; border: 1px solid #6a706e; background-color: transparent;"> Buy a subscription</button></a>
           </div>
       </div>
+      
       </form>
 </div>
   </body>

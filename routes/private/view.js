@@ -1,3 +1,4 @@
+const { isEmpty } = require('lodash');
 const db = require('../../connectors/db');
 const roles = require('../../constants/roles');
 const { getSessionToken } = require('../../utils/session');
@@ -61,6 +62,21 @@ module.exports = function(app) {
   app.get('/tickets', async function(req, res) {
     const user = await getUser(req);
     const ticket = await db.select('*').from('se_project.tickets').where("userid",user.userid );
+    let appear=[];
+    let disappear=[];
+
+    // for(let i=0;i<ticket.length;i++){
+    // const Refund=await db.select("status").from("se_project.refund_requests").where("ticketid",ticket[0].id);
+    
+    // if(isEmpty(Refund)){
+    //   disappear.push(false);
+    //  appear.push(true);
+    // }
+    //   else{
+    //  disappear.push(true);
+    //  appear.push(false);
+    //    }
+    //   }
     return res.render('view_ticket', {user,ticket});
   });
 

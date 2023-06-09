@@ -87,7 +87,7 @@
         <h3><u>Routes</u></h3>
     </div>
       <div >
-          <table style="bgcolor:black; width:150%; " align="center">
+          <table style="bgcolor:black; width:150%; border-collapse: separate; border-spacing: 0 10px; " align="center">
             <thead>
             <tr>
              <th style="text-align: center"> Route name </th>
@@ -102,13 +102,13 @@
                 <td style="text-align: center">{{from}}</td>
                 <td style="text-align: center">{{to}}</td>
                 <td style="text-align: center">
-                <button id={{id}} class="btn btn-danger delete" type="button" >Delete</button>
+                <button id={{id}} class="btn btn-danger delete" type="button" style="border-radius: 20px; ">Delete</button>
                 </td>
                <td style="text-align: center">
-                 <button id={{id}} class="btn btn-primary update" type="button" >Update</button>
+                 <button id={{id}} class="btn btn-primary update" type="button" style="border-radius: 20px; ">Update</button>
                 </td>
                 <td>
-                  <input type="text" id="name{{id}}" placeholder="Route name">
+                  <input type="text" id="name{{id}}" placeholder="Route name"  style="border-radius: 20px; " > 
                 </td>
             </tr>
             {{/routes}}

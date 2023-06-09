@@ -743,15 +743,11 @@ module.exports = function (app) {
 
     let currentStationID=nextStationId;
 
-
     const currentStationroutes = await db
     .select("tostationid")
     .from("se_project.routes")
     .where("fromstationid", currentStationID)
     .whereNot("tostationid", prevStationId);
-
-    console.log("cuurent bebjha",currentStationID);
-    console.log("Current stati route",currentStationroutes);
 
     for (let i=0; i < currentStationroutes.length; i++){
            if (currentStationroutes[i]["tostationid"]==destinationid){
@@ -995,8 +991,6 @@ module.exports = function (app) {
   if (senior[0]["roleid"]==3)
   checkprice=checkprice*0.5;
 
-  console.log("final Route",routeArray);
-
   return res.status(200).json({checkprice});
    }catch(e){
     console.log(e.message);
@@ -1089,7 +1083,7 @@ app.post("/api/v1/payment/ticket",  async function (req, res){
             if(nextStationId==undefined){
               nextStationId=routeArray[0];
               prevStationId=routeArray[1];
-              routeArray=[0];
+              routeArray=[nextStationId];
               continue;
             }
 
@@ -1452,7 +1446,7 @@ app.post("/api/v1/tickets/purchase/subscription",  async function (req, res){
             if(nextStationId==undefined){
               nextStationId=routeArray[0];
               prevStationId=routeArray[1];
-              routeArray=[0];
+              routeArray=[nextStationId];
               continue;
             }
 
@@ -1628,7 +1622,7 @@ app.post("/api/v1/tickets/purchase/subscription",  async function (req, res){
        .from("se_project.subsription")
        .where("id", req.body.subId);
 
-
+   
    if (zoneID[0]["zoneid"]==1 && number_of_stations>9){
     return res.status(400).send(`your subscription is only valid for routes with maximum number of 9 stations, while current route is ${number_of_stations} stations`);
    }
@@ -1950,7 +1944,10 @@ const requestExists = await db
 .where("userid", user.userid);
 
 if (!isEmpty(requestExists)) {
+  if(requestExists[0].status=="pending")
   return res.status(400).send("request exists");
+  else if(requestExists[0].status=="Accept")
+  return res.status(400).send("Cant send request, you are already a senior");
 }
 
 const newsrequest ={

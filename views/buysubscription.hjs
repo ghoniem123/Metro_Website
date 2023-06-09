@@ -196,7 +196,7 @@
       <br>
       <div class="form-group">
           <div style ="padding-left:20px">
-              <input id="submit" name="Buy" type="button" value="Buy" class="btn btn-primary">
+              <input id="submit" name="Buy" type="button" style="border-radius: 20px; color: #6a706e; border: 1px solid #6a706e; background-color: transparent;"value="Buy" class="btn btn-primary">
           </div>
       </div>
       </form>
