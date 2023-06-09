@@ -74,7 +74,7 @@
      <div>
       <nav class="navbar navbar-inverse" style="padding-left:20px; padding-right:20px">
           <ul class="nav navbar-nav">
-           <li ><a href="/dashboard">Home</a></li>
+           <li ><a href="/dashboard">Map</a></li>
             <li ><a href="/manage/stations">Stations</a></li>
             <li><a href="/manage/routes">Routes</a></li>
             <li><a href="/manage/zones">Zones</a></li>
@@ -92,7 +92,7 @@
         <h3><u>Pending requests</u></h3>
     </div>
       <div >
-          <table style="bgcolor:black; width:120%; " align="center">
+          <table style="bgcolor:black; width:135%; " align="center">
             <thead>
             <tr>
              <th style="text-align: center"> Request status </th>
@@ -125,7 +125,7 @@
         <h3><u>Accepted requests</u></h3>
     </div>
       <div >
-          <table style="bgcolor:black; width:120%; " align="center">
+          <table style="bgcolor:black; width:135%; " align="center">
             <thead>
             <tr>
      <th style="text-align: center"> Request status </th>
@@ -152,7 +152,7 @@
         <h3><u>Rejected requests</u></h3>
     </div>
       <div >
-          <table style="bgcolor:black; width:120%; " align="center">
+          <table style="bgcolor:black; width:135%; " align="center">
             <thead>
             <tr>
      <th style="text-align: center"> Request status </th>

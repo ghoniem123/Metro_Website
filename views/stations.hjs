@@ -72,7 +72,7 @@
      <div>
       <nav class="navbar navbar-inverse" style="padding-left:20px; padding-right:20px">
           <ul class="nav navbar-nav">
-           <li ><a href="/dashboard">Home</a></li>
+           <li ><a href="/dashboard">Map</a></li>
             <li class="active"><a href="/manage/stations">Stations</a></li>
             <li><a href="/manage/routes">Routes</a></li>
             <li><a href="/manage/zones">Zones</a></li>
@@ -90,7 +90,7 @@
         <h3><u>Stations</u></h3>
     </div>
       <div >
-          <table style="bgcolor:black; width:100%; " align="center">
+          <table style="bgcolor:black; width:150%; " align="center">
             <thead>
             <tr>
              <th style="text-align: center"> station name </th>

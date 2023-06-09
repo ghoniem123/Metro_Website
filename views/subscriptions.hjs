@@ -15,35 +15,12 @@
         if (!sessionToken) {
           location.href = '/';
         }
-
-          $.ajax({
-            type: "GET",
-            url: '/api/v1/zones',
-            success: function(serverResponse) {
-              if(serverResponse) {
- document.getElementById("1").innerHTML =serverResponse[0].id;
-  document.getElementById("1_s").innerHTML =serverResponse[0].zonetype;
-   document.getElementById("1_p").innerHTML =serverResponse[0].price;
-    document.getElementById("2").innerHTML =serverResponse[1].id;
-     document.getElementById("2_s").innerHTML =serverResponse[1].zonetype;
-      document.getElementById("2_p").innerHTML =serverResponse[1].price;
-       document.getElementById("3").innerHTML =serverResponse[2].id;
-        document.getElementById("3_s").innerHTML =serverResponse[2].zonetype;
-         document.getElementById("3_p").innerHTML =serverResponse[2].price;
-              }
-            },
-            error: function(errorResponse) {
-              if(errorResponse) {
-                alert(`Error: ${errorResponse.responseText}`);
-              }            
-            }
-          });
       });
    </script>
      <div>
       <nav class="navbar navbar-inverse" style="padding-left:20px; padding-right:20px">
           <ul class="nav navbar-nav">
-           <li ><a href="/dashboard">Home</a></li>
+           <li ><a href="/dashboard">Map</a></li>
 
             <li class="active"><a href="/subscriptions">Subscriptions</a></li>
             <li><a href="/tickets">Tickets</a></li>
@@ -58,35 +35,6 @@
       </nav>
     </div>
 <div style ="padding-left:20px">
-  <form class="form-horizontal" style="width: 50%;">
-    <div>
-        <h3><u>Zones data</u></h3>
-    </div>
-      <div >
-          <table style="bgcolor:black; width:100%; " align="center">
-            <tr>
-                <th style="text-align: center">Zone</th>
-                <th style="text-align: center">Number of stations allowed</th>
-                <th style="text-align: center">Price</th>
-            </tr>
-            <tr>
-                <td id="1" style="text-align: center"></td>
-                <td id="1_s" style="text-align: center"></td>
-                <td id="1_p" style="text-align: center"></td>
-            </tr>
-             <tr>
-                <td id="2" style="text-align: center"></td>
-                <td id="2_s" style="text-align: center"></td>
-                <td id="2_p" style="text-align: center"></td>
-            </tr>
-             <tr>
-                <td id="3" style="text-align: center"></td>
-                <td id="3_s" style="text-align: center"></td>
-                <td id="3_p" style="text-align: center"></td>
-            </tr>
-          </table>
-      </div>
-      </form>
        <form class="form-horizontal" style="width: 50%;">
     <div>
         <h3><u>My subscriptions</u></h3>
@@ -114,7 +62,7 @@
       <div class="form-group">
           <div>
             <br>
-             To buy subscriptions <a href="/buysubscription">
+             To buy subscriptions <a href="/subscriptions/purchase">
               click here
              </a>
           </div>

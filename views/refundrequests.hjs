@@ -16,33 +16,13 @@
           location.href = '/';
         }
   
-      $("#pay").click(function() {
-          let ticketId=-1;
-        if($('#ticket').val())
-         ticketId = $('#ticket').val();
-
-        $.ajax({
-          type: "POST",
-          url: `/api/v1/refund/${ticketId}`,
-          success: function(serverResponse) {
-            if(serverResponse) {
-              alert('Request sent');
-            }
-              $('#ticket').val("");
-          },
-          error: function(errorResponse) {
-            if(errorResponse) {
-              alert(`Error : ${errorResponse.responseText}`);
-            }            
-          }
-        });
-      });      
+    
     });
     </script>
      <div>
       <nav class="navbar navbar-inverse" style="padding-left:20px; padding-right:20px">
           <ul class="nav navbar-nav">
-           <li ><a href="/dashboard">Home</a></li>
+           <li ><a href="/dashboard">Map</a></li>
             <li><a href="/subscriptions">Subscriptions</a></li>
             <li ><a href="/tickets">Tickets</a></li>
             <li ><a href="/prices">Prices</a></li>
@@ -63,42 +43,26 @@
           <table style="bgcolor:black; width:100%; " align="center">
             <thead>
             <tr>
-                <th style="text-align: center">Request ID </th>
                 <th style="text-align: center">Request status</th>
                 <th style="text-align: center">Refund amount</th>
-                <th style="text-align: center">Ticket ID</th>
+                <th style="text-align: center">Ticket Origin station</th>
+                <th style="text-align: center">Ticket destination station</th>
+                <th style="text-align: center">Ticket Date </th>
             </tr>
             </thead>
             <tbody>
               {{#refund}}
             <tr>
-                <td style="text-align: center">{{id}}</td>
                 <td style="text-align: center">{{status}}</td>
                 <td style="text-align: center">{{refundamount}}</td>
-                <td style="text-align: center">{{ticketid}}</td>
+                <td style="text-align: center">{{origin}}</td>
+                <td style="text-align: center">{{destination}}</td>
+                <td style="text-align: center">{{tripdate}}</td>
             </tr>
             {{/refund}}
            </tbody>
           </table>
       </div>
-      <br>
-      <br>
-      <h3><u>Request Refund</u></h3>
-    </div>
-    <div>
-    <form class="form-horizontal" style="width: 50%;">
-      <div class="form-group">
-          <label for="ticket" class="col-sm-2 control-label">Ticket ID : </label>
-          <div class="col-sm-10">
-              <input type="number" class="form-control" id="ticket" name="ticket" placeholder="" value="">
-          </div>
-      </div>
-      <div class="form-group">
-          <div class="col-sm-10 col-sm-offset-2">
-              <input id="pay" name="pay" type="submit" value="request" class="btn btn-primary">
-          </div>
-      </div>
-  </form>
     </div>
   </body>
 </html>

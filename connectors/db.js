@@ -10,7 +10,7 @@ const config = {
     host: 'localhost',
     port: 5432,
     user: 'postgres',
-    password: 'rawan2003',
+    password: 'mohamed2003',
     database: 'postgres',
   }
 };

@@ -15,6 +15,8 @@
         if (!sessionToken) {
           location.href = '/';
         }
+         $('#origin').val("");
+         $('#destination').val("");
 
         $("#submit").click(function() {
  
@@ -25,8 +27,8 @@
             url: `/api/v1/tickets/price?originId=${originId}&destinationId=${destinationId}` ,
             success: function(serverResponse) {
               if(serverResponse) {
-                const {price}=serverResponse[0];
-                document.getElementById("Price").innerHTML =  price;
+                const checkprice=serverResponse["checkprice"];
+                document.getElementById("Price").innerHTML =  checkprice;
               }
             },
             error: function(errorResponse) {
@@ -44,7 +46,7 @@
     <div>
       <nav class="navbar navbar-inverse" style="padding-left:20px; padding-right:20px">
           <ul class="nav navbar-nav">
-           <li ><a href="/dashboard">Home</a></li>
+           <li ><a href="/dashboard">Map</a></li>
             <li><a href="/subscriptions">Subscriptions</a></li>
             <li><a href="/tickets">Tickets</a></li>
             <li class="active"><a href="/prices">Prices</a></li>
