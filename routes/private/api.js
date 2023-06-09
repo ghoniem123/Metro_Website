@@ -152,7 +152,13 @@ module.exports = function (app) {
   const stationtype = stationExists[0]["stationtype"];
   const stationposition = stationExists[0]["stationposition"];
 
-  if (stationposition.trim()=="start"){
+
+  if (stationposition==null){
+    await db("se_project.stations").where("id", stationID).del();
+    return res.status(200).json("Station deleted successfully");
+  }
+
+  else if (stationposition.trim()=="start"){
 
     let nextStationID ="";
     const stationroutes = await db
