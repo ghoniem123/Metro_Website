@@ -118,7 +118,7 @@
       <br>
       <div class="form-group">
           <div>
-              To create a new station <a href="/manage/routes/create">click here.</a>
+              To create a new route <a href="/manage/routes/create">click here.</a>
           </div>
       </div>
   </form>
