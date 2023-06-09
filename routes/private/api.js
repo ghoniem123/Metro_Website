@@ -750,6 +750,9 @@ module.exports = function (app) {
     .where("fromstationid", currentStationID)
     .whereNot("tostationid", prevStationId);
 
+    console.log("cuurent bebjha",currentStationID);
+    console.log("Current stati route",currentStationroutes);
+
     for (let i=0; i < currentStationroutes.length; i++){
            if (currentStationroutes[i]["tostationid"]==destinationid){
             routeArray.push(currentStationroutes[i]["tostationid"]);
@@ -773,10 +776,10 @@ module.exports = function (app) {
    
 
     let i2=0;
-    let un_defined = false;
 
     while ( i2<currentStationroutes.length  && visistedArray.includes(currentStationroutes[i2]["tostationid"]) )
           i2++;  
+
        
           if (i2==currentStationroutes.length){
 
@@ -786,15 +789,14 @@ module.exports = function (app) {
       
 
             if(nextStationId==undefined){
-              un_defined=true;
               nextStationId=routeArray[0];
               prevStationId=routeArray[1];
-              routeArray=[0];
-              break;
+              routeArray=[nextStationId];
+              continue;
             }
 
 
-            if(nextStationId!=prevStationId && nextStationId!=currentStationID){
+            if(nextStationId!=prevStationId && nextStationId!=currentStationID && nextStationId!=undefined){
                    const ConnectionExists = await db
                    .select("*")
                    .from("se_project.routes")
@@ -877,8 +879,7 @@ module.exports = function (app) {
 
             continue;
           }
-          if(un_defined)
-            continue;
+   
 
     if (currentStationroutes[0]==null ){
  
@@ -994,6 +995,7 @@ module.exports = function (app) {
   if (senior[0]["roleid"]==3)
   checkprice=checkprice*0.5;
 
+  console.log("final Route",routeArray);
 
   return res.status(200).json({checkprice});
    }catch(e){
@@ -1073,7 +1075,6 @@ app.post("/api/v1/payment/ticket",  async function (req, res){
 
     let i2=0;
 
-    let un_defined = false;
 
     while ( i2<currentStationroutes.length  && visistedArray.includes(currentStationroutes[i2]["tostationid"]) )
           i2++;  
@@ -1086,11 +1087,10 @@ app.post("/api/v1/payment/ticket",  async function (req, res){
       
 
             if(nextStationId==undefined){
-              un_defined=true;
               nextStationId=routeArray[0];
               prevStationId=routeArray[1];
               routeArray=[0];
-              break;
+              continue;
             }
 
 
@@ -1177,8 +1177,6 @@ app.post("/api/v1/payment/ticket",  async function (req, res){
 
             continue;
           }
-          if(un_defined)
-            continue;
 
     if (currentStationroutes[0]==null ){
  
@@ -1440,7 +1438,6 @@ app.post("/api/v1/tickets/purchase/subscription",  async function (req, res){
 
     let i2=0;
 
-    let un_defined = false;
 
     while ( i2<currentStationroutes.length  && visistedArray.includes(currentStationroutes[i2]["tostationid"]) )
           i2++;  
@@ -1453,11 +1450,10 @@ app.post("/api/v1/tickets/purchase/subscription",  async function (req, res){
       
 
             if(nextStationId==undefined){
-              un_defined=true;
               nextStationId=routeArray[0];
               prevStationId=routeArray[1];
               routeArray=[0];
-              break;
+              continue;
             }
 
 
@@ -1544,8 +1540,7 @@ app.post("/api/v1/tickets/purchase/subscription",  async function (req, res){
 
             continue;
           }
-          if(un_defined)
-            continue;
+  
     if (currentStationroutes[0]==null ){
  
       nextStationId=transferStation.pop();

@@ -79,7 +79,8 @@
                 <td style="text-align: center">{{subid}}</td>
                 <td style="text-align: center">{{tripdate}}</td>
                  <td style="text-align: center">
-                 <button id={{id}} class="btn btn-primary refund" type="button" >Refund</button>
+                 <button id={{id}} class=" refund" type="button" 
+                 style="border-radius: 20px; color: #6a706e; border: 1px solid #6a706e; background-color: transparent;" >Refund</button>
                 </td>
             </tr>
             {{/ticket}}
@@ -90,7 +91,10 @@
       <br>
        <div class="form-group">
           <div >
-              To purchase a ticket <a href="/tickets/purchase">click here.</a> Or to purchase using subscription<a href="/tickets/purchase/subscription"> click here.</a>
+            <a href="/tickets/purchase" ><button  style="border-radius: 20px; color: #6a706e; border: 1px solid #6a706e; background-color: transparent;"> To purchase a ticket</button></a>
+            <br>
+            <br>
+            <a href="/tickets/purchase/subscription" ><button  style="border-radius: 20px; color: #6a706e; border: 1px solid #6a706e; background-color: transparent;"> To purchase using subscription</button></a>
           </div>
       </div>
 </div>
