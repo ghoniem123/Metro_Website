@@ -108,10 +108,10 @@
                 <td style="text-align: center">{{stationstatus}}</td>
                 <td style="text-align: center">{{tripdate}}</td>
                 <td style="text-align: center">
-                <button id={{id}} class="btn btn-danger delete" type="button"style="border-radius: 20px; " >Delete</button>
+                <button id={{id}} class="btn btn-danger delete" type="button"  style="border-radius: 20px; color: #860101; border: 2px solid #860101; background-color: transparent;" >Delete</button>
                 </td>
                 <td style="text-align: center">
-                 <button id={{id}} class="btn btn-primary update" type="button"style="border-radius: 20px; " >Update</button>
+                 <button id={{id}} class="btn btn-primary update" type="button" style="border-radius: 20px; color: #000768; border: 2px solid #000768; background-color: transparent; " >Update</button>
                 </td>
                 <td>
                   <input type="text" id="name{{id}}" style="border-radius: 20px; "placeholder="Station name">
