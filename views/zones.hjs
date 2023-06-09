@@ -117,7 +117,7 @@
             <option>3</option>
           </select>
 <br>
-    <button id="submit" type="button">Update</button>
+    <button id="submit" class="btn btn-primary" type="button" style="border-radius: 20px; color: #6a706e; border: 1px solid #6a706e; background-color: transparent;">Update</button>
 
       </div>
 

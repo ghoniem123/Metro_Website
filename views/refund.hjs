@@ -111,10 +111,10 @@
                 <td style="text-align: center">{{refundamount}}</td>
                 <td style="text-align: center">{{tripdate}}</td>
                 <td style="text-align: center">
-                <button id={{id}} class="btn btn-primary accept" type="submit" >Accept</button>
+                <button id={{id}} class="btn btn-primary accept" type="submit" style="border-radius: 20px; ">Accept</button>
                 </td>
                 <td style="text-align: center">
-                 <button id={{id}} class="btn btn-danger reject" type="button" >Reject</button>
+                 <button id={{id}} class="btn btn-danger reject" type="button"style="border-radius: 20px; " >Reject</button>
                 </td>
             </tr>
             {{/pending}}

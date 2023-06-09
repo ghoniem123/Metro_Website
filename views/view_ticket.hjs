@@ -91,10 +91,10 @@
       <br>
        <div class="form-group">
           <div >
-            <a href="/tickets/purchase" ><button  style="border-radius: 20px; color: #6a706e; border: 1px solid #6a706e; background-color: transparent;"> To purchase a ticket</button></a>
+            <a href="/tickets/purchase" ><button  style="border-radius: 20px; color: #6a706e; border: 1px solid #6a706e; background-color: transparent;"> Purchase a ticket</button></a>
             <br>
             <br>
-            <a href="/tickets/purchase/subscription" ><button  style="border-radius: 20px; color: #6a706e; border: 1px solid #6a706e; background-color: transparent;"> To purchase using subscription</button></a>
+            <a href="/tickets/purchase/subscription" ><button  style="border-radius: 20px; color: #6a706e; border: 1px solid #6a706e; background-color: transparent;"> Purchase using subscription</button></a>
           </div>
       </div>
 </div>

@@ -81,7 +81,7 @@
       <br>
       <div class="form-group" style ="padding-left:20px">
           <div>
-              <input id="submit" name="check" type="button" value="Check" class="btn btn-primary">
+              <input id="submit" name="check" type="button" style="border-radius: 20px; color: #6a706e; border: 1px solid #6a706e; background-color: transparent;" value="Check" class="btn btn-primary">
           </div>
       </div>
       <div class="form-group" style ="padding-left:20px">
