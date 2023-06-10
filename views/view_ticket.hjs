@@ -88,7 +88,7 @@
                  {{#isRefund}}
                  <td style="text-align: center">
                  <button id={{id}} class=" refund" type="button" 
-                 style="border-radius: 20px; color: #fbfbfb; border: 1px solid #ffffff; background-color: #000;" disabled>Refunded</button>
+                 style="border-radius: 20px; color: #fbfbfb; border: 1px solid #ffffff; background-color: #000;" disabled>Requested</button>
                 </td>
                 {{/isRefund}}
             </tr>
