@@ -82,7 +82,7 @@ module.exports = function(app) {
      const t={
          id: ticket[i].id,
          origin : ticket[i].origin,
-         destination : ticket[1].destination,
+         destination : ticket[i].destination,
          subid: ticket[i].subid,
          tripdate : ticket[i].tripdate,
          isRefund : isRefunded,
