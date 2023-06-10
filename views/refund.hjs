@@ -92,7 +92,7 @@
         <h3><u>Pending requests</u></h3>
     </div>
       <div >
-          <table style="bgcolor:black; width:135%; " align="center">
+          <table style="bgcolor:black; width:150%; border-collapse: separate; border-spacing: 0 10px;" align="center">
             <thead>
             <tr>
              <th style="text-align: center"> Request status </th>
@@ -111,10 +111,10 @@
                 <td style="text-align: center">{{refundamount}}</td>
                 <td style="text-align: center">{{tripdate}}</td>
                 <td style="text-align: center">
-                <button id={{id}} class="btn btn-primary accept" type="submit" style="border-radius: 20px; ">Accept</button>
+                <button id={{id}} class="btn btn-primary accept" type="submit" style="border-radius: 20px; color: #000768; border: 2px solid #000768; background-color: transparent; ">Accept</button>
                 </td>
                 <td style="text-align: center">
-                 <button id={{id}} class="btn btn-danger reject" type="button"style="border-radius: 20px; " >Reject</button>
+                 <button id={{id}} class="btn btn-danger reject" type="button"style="border-radius: 20px; color: #860101; border: 2px solid #860101; background-color: transparent;" >Reject</button>
                 </td>
             </tr>
             {{/pending}}
@@ -125,7 +125,7 @@
         <h3><u>Accepted requests</u></h3>
     </div>
       <div >
-          <table style="bgcolor:black; width:135%; " align="center">
+          <table style="bgcolor:black; width:150%; border-collapse: separate; border-spacing: 0 10px;" align="center">
             <thead>
             <tr>
      <th style="text-align: center"> Request status </th>
@@ -152,7 +152,7 @@
         <h3><u>Rejected requests</u></h3>
     </div>
       <div >
-          <table style="bgcolor:black; width:135%; " align="center">
+          <table style="bgcolor:black; width:150%; border-collapse: separate; border-spacing: 0 10px;" align="center">
             <thead>
             <tr>
      <th style="text-align: center"> Request status </th>
