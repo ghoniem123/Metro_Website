@@ -1896,13 +1896,13 @@ app.put("/api/v1/password/reset",async function (req, res){
   if (isEmpty (ticketExists)) {
     return res.status(400).send("this ticket doesn't exist");
 }
-  const tripDate=await db.select("tripdate").from("se_project.tickets").where("id", ticketId);
-  const currentDate=new Date();
-  const currentTimestamp=currentDate.getTime ();
+  //const tripDate=await db.select("tripdate").from("se_project.tickets").where("id", ticketId);
+ // const currentDate=new Date();
+ // const currentTimestamp=currentDate.getTime ();
 
-  if(!(currentTimestamp <tripDate[0]["tripdate"])){ 
-   return res.status (400).send("ticket is not future dated");
-   }
+  // if(!(currentTimestamp <tripDate[0]["tripdate"])){ 
+  //  return res.status (400).send("ticket is not future dated");
+  //  }
    
   const subID =await db.select("subid").from("se_project.tickets").where("id", ticketId);
 
