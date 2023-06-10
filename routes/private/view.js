@@ -62,22 +62,36 @@ module.exports = function(app) {
   app.get('/tickets', async function(req, res) {
     const user = await getUser(req);
     const ticket = await db.select('*').from('se_project.tickets').where("userid",user.userid );
-    let appear=[];
-    let disappear=[];
+    // let appear=[];
+    let isRefunded=false;
+    let isNotRefunded=false;
+    let tickets=[];
 
-    // for(let i=0;i<ticket.length;i++){
-    // const Refund=await db.select("status").from("se_project.refund_requests").where("ticketid",ticket[0].id);
+    for(let i=0;i<ticket.length;i++){
+    const Refund=await db.select("status").from("se_project.refund_requests").where("ticketid",ticket[i].id);
     
-    // if(isEmpty(Refund)){
-    //   disappear.push(false);
-    //  appear.push(true);
-    // }
-    //   else{
-    //  disappear.push(true);
-    //  appear.push(false);
-    //    }
-    //   }
-    return res.render('view_ticket', {user,ticket});
+    if(isEmpty(Refund)){
+      isRefunded=false;
+    }
+      else {
+        isRefunded=true;
+       }
+
+       isNotRefunded=!isRefunded;
+
+     const t={
+         id: ticket[i].id,
+         origin : ticket[i].origin,
+         destination : ticket[1].destination,
+         subid: ticket[i].subid,
+         tripdate : ticket[i].tripdate,
+         isRefund : isRefunded,
+         isNotRefund : isNotRefunded ,
+     }
+ tickets.push(t);
+
+      }
+    return res.render('view_ticket', {user,tickets});
   });
 
   app.get('/tickets/purchase', async function(req, res) {

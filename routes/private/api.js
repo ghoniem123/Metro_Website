@@ -1951,9 +1951,9 @@ const requestExists = await db
 
 if (!isEmpty(requestExists)) {
   if(requestExists[0].status=="pending")
-  return res.status(400).send("request exists");
+       return res.status(400).send("request exists");
   else if(requestExists[0].status=="Accept")
-  return res.status(400).send("Cant send request, you are already a senior");
+       return res.status(400).send("Cant send request, you are already a senior");
 }
 
 const newsrequest ={
