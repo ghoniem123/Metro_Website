@@ -26,6 +26,7 @@
           success: function(serverResponse) {
             if(serverResponse) {
               alert('Request sent');
+              location.href="/tickets"
             }
               $('#ticket').val("");
           },
