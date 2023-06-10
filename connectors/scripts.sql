@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS se_project.refund_requests
     id SERIAL NOT NULL,
     status text NOT NULL,
     userid Integer NOT NULL, 
-    refundamount INTEGER not NULL,
+    refundamount FLOAT not NULL,
     ticketid INTEGER NOT null,
     FOREIGN KEY( userid ) REFERENCES se_project.users,
     FOREIGN KEY( ticketid ) REFERENCES se_project.tickets,

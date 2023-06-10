@@ -72,18 +72,26 @@
             </tr>
             </thead>
             <tbody id="body">
-              {{#ticket}}
+              {{#tickets}}
             <tr>
                 <td style="text-align: center">{{origin}}</td>
                 <td style="text-align: center">{{destination}}</td>
                 <td style="text-align: center">{{subid}}</td>
                 <td style="text-align: center">{{tripdate}}</td>
+                {{#isNotRefund}}
                  <td style="text-align: center">
                  <button id={{id}} class=" refund" type="button" 
                  style="border-radius: 20px; color: #6a706e; border: 1px solid #6a706e; background-color: transparent;" >Refund</button>
                 </td>
+                {{/isNotRefund}}
+                 {{#isRefund}}
+                 <td style="text-align: center">
+                 <button id={{id}} class=" refund" type="button" 
+                 style="border-radius: 20px; color: #fbfbfb; border: 1px solid #ffffff; background-color: #000;" disabled>Refunded</button>
+                </td>
+                {{/isRefund}}
             </tr>
-            {{/ticket}}
+            {{/tickets}}
            </tbody>
           </table>
       </div>
