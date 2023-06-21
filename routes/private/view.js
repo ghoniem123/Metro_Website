@@ -58,6 +58,10 @@ module.exports = function(app) {
     const user = await getUser(req);
     return res.render('buysubscription', user);
   });
+  app.get('/complain', async function(req, res) {
+    const user = await getUser(req);
+    return res.render('complain', user);
+  });
 
   app.get('/tickets', async function(req, res) {
     const user = await getUser(req);
